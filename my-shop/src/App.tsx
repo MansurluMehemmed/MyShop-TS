@@ -1,6 +1,7 @@
 import { BrowserRouter as Router } from "react-router-dom"
 import Navbar from "./components/Navbar"
 import Slider from "./components/Slider"
+import NewArivals from "./components/NewArivals"
 
 
 function App() {
@@ -13,6 +14,7 @@ function App() {
         <div>
           <Slider/>
         </div>
+        <NewArivals/>
     </Router>
   )
 }

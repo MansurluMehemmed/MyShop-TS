@@ -4,3 +4,7 @@ body{
   font-family:inherit
 }
 button{cursor: pointer;}
+.active {
+  background-color: rgb(255, 70, 70);
+  color: white;
+}
