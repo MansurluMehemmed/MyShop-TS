@@ -4,11 +4,13 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 export interface Product {
   id: number;
   title: string;
+  description: string;
+  price: number;
   thumbnail: string;
 }
 
 export interface CardState {
-  data: Product[]; // `any[]` yerinə `Product[]` istifadə etdik
+  data: Product[];
   isLoading: boolean;
   error: boolean;
 }
@@ -19,12 +21,27 @@ const initialState: CardState = {
   error: false,
 };
 
-// API-dən məlumat çəkmək üçün async thunk
-export const fetchData = createAsyncThunk<Product[]>("fetchSlice", async () => {
-  const response = await fetch("https://dummyjson.com/products?limit=12&skip=0");
-  const data = await response.json();
-  return data.products; // `products` array-ını return edirik
-});
+// ✅ `fetch` istifadə edərək API məlumatlarını əldə edən `createAsyncThunk`
+export const fetchData = createAsyncThunk<Product[]>(
+  "fetchSlice",
+  async (): Promise<Product[]> => {
+    
+    try {
+      const response = await fetch("https://dummyjson.com/products");
+      
+      if (!response.ok) {
+        throw new Error(`Xəta kodu: ${response.status}`);
+      }
+
+      const data = await response.json();
+      
+      return data.products; // 🔥 `products` açarını qaytarırıq
+    } catch (error) {
+      console.error("Xəta baş verdi:", error);
+      return [];
+    }
+  }
+);
 
 export const FetchSlice = createSlice({
   name: "fetch",
@@ -36,8 +53,7 @@ export const FetchSlice = createSlice({
     });
     builder.addCase(fetchData.fulfilled, (state, action) => {
       state.isLoading = false;
-      state.data = action.payload; 
-      console.log(action.payload);
+      state.data = action.payload;
     });
     builder.addCase(fetchData.rejected, (state) => {
       state.isLoading = false;
