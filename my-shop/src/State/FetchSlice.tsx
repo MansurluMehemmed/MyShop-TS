@@ -9,7 +9,8 @@ export interface Product {
   thumbnail: string;
   discountPercentage:number;
   category:string;
-  brand:string
+  brand:string,
+  count:number
 }
 
 export interface CardState {
@@ -20,6 +21,7 @@ export interface CardState {
   selectedCategory:string;
   showMore:number
   seachQuery:string
+  basketData:Product[]
 }
 
 const initialState: CardState = {
@@ -29,7 +31,8 @@ const initialState: CardState = {
   error: false,
   selectedCategory:'ALL',
   showMore:10,
-  seachQuery:''
+  seachQuery:'',
+  basketData:[]
 };
 
 
@@ -69,6 +72,35 @@ export const FetchSlice = createSlice({
     },
     setSearchQuery:(state,action)=>{
       state.seachQuery = action.payload
+    },
+    add:(state,action)=>{
+      let i=0;
+      if(state.basketData.find((item,index)=>{
+          i = index
+          return item.id === action.payload.id
+          
+          
+      })){
+        state.basketData[i].count++
+        state.basketData = [...state.basketData]
+      }else{
+        state.basketData = [...state.basketData,action.payload]
+      }
+      
+    },
+    decrease:(state,action)=>{
+      let i=0;
+      if(state.basketData.find((item,index)=>{
+          i = index
+          return item.id === action.payload.id
+          
+          
+      })){
+        state.basketData[i].count !==1&& state.basketData[i].count--
+        state.basketData = [...state.basketData]
+      }else{
+        state.basketData = [...state.basketData,action.payload]
+      }
     }
   },
   extraReducers: (builder) => {
@@ -88,5 +120,5 @@ export const FetchSlice = createSlice({
     });
   },
 });
-export const  {selectedCategories,showMoreClick,setSearchQuery} = FetchSlice.actions
+export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease} = FetchSlice.actions
 export default FetchSlice.reducer;
