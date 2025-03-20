@@ -2,12 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
 import FavoriButton from "../layouts/FavoriButton";
 import { Link } from "react-router-dom";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect} from "react";
 import { fetchData } from "../State/FetchSlice";
 
 const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {  data,isLoading, error } = useSelector(
+  let {  data,isLoading, error,showMore } = useSelector(
     (state: RootState) => state.fetch
   );
   const selectedCategory = useSelector(
@@ -15,25 +15,27 @@ const Cards = () => {
   );
 
   useEffect(() => {
-    dispatch(fetchData());
-  }, [data]);
+    dispatch(fetchData(showMore));
+  }, [dispatch]);
   
   const getFilteredProducts = ()=>{
-     let filteredProducts = data
     if(selectedCategory!=='ALL'){
-      filteredProducts = filteredProducts.filter(product=>product.category.toUpperCase()===selectedCategory)
+      data = data.filter(product=>product.category.toUpperCase()===selectedCategory)
     }
     else{
-      filteredProducts = data
+      data = data
     }
-    return filteredProducts
+    return data
   }
   const filteredProducts = getFilteredProducts()
   return (
     <>
+      
       {filteredProducts.map((item) => (
         <div
-          key={item.id}
+        key={item.id}
+       
+          
           className="flex group  relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col w-[20%] hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
         >
           <div className="w-full flex  ">

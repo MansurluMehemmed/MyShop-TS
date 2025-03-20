@@ -18,6 +18,7 @@ export interface CardState {
   isLoading: boolean;
   error: boolean;
   selectedCategory:string;
+  showMore:number
 }
 
 const initialState: CardState = {
@@ -25,33 +26,33 @@ const initialState: CardState = {
   category:[],
   isLoading: false,
   error: false,
-  selectedCategory:'ALL'
+  selectedCategory:'ALL',
+  showMore:10
 };
 
 
 
 
-
 // ✅ `fetch` istifadə edərək API məlumatlarını əldə edən `createAsyncThunk`
-export const fetchData = createAsyncThunk<Product[]>(
+export const fetchData = createAsyncThunk<Product[],number>(
   "fetchSlice",
-  async (): Promise<Product[]> => {
-    
+  async (limit) => {  // ✅ Burada limit arqument kimi gəlir
     try {
-      const response = await fetch("https://dummyjson.com/products?limit=12&skip=0");
-      
+      const response = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=0`);
+
       if (!response.ok) {
-        throw new Error(`Xəta kodu: ${response.status}`);
+        const errorMessage = await response.text();
+        throw new Error(`Xəta kodu: ${response.status} | Mesaj: ${errorMessage}`);
       }
 
       const data = await response.json();
-      
-      return data.products; // 🔥 `products` açarını qaytarırıq
-    } catch (error) {
-      console.error("Xəta baş verdi:", error);
+      return data.products; // ✅ `Product[]` qaytarır
+    } catch (error: any) {
+      console.error("API Xətası:", error.message);
       return [];
     }
   }
+
 );
 
 export const FetchSlice = createSlice({
@@ -60,6 +61,9 @@ export const FetchSlice = createSlice({
   reducers: {
     selectedCategories:(state,action)=>{
       state.selectedCategory = action.payload
+    },
+    showMoreClick:(state)=>{
+      state.showMore +=5
     }
   },
   extraReducers: (builder) => {
@@ -79,5 +83,5 @@ export const FetchSlice = createSlice({
     });
   },
 });
-export const  {selectedCategories} = FetchSlice.actions
+export const  {selectedCategories,showMoreClick} = FetchSlice.actions
 export default FetchSlice.reducer;

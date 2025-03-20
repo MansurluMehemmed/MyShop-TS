@@ -3,11 +3,10 @@ import '../index.css'
 import Cards from './Cards'
 import { useDispatch, useSelector } from 'react-redux'
 import { AppDispatch, RootState } from '../State/store'
-import { selectedCategories } from '../State/FetchSlice'
+import { fetchData, selectedCategories, showMoreClick } from '../State/FetchSlice'
 const NewArivals = () => {
     const dispatch = useDispatch<AppDispatch>()
-    
-    const data = useSelector((state:RootState)=>state.fetch.data)
+   const {showMore} = useSelector((state:RootState)=>state.fetch)
     const category = useSelector((state:RootState)=>state.fetch.category)
     const selectedCategory = useSelector((state:RootState)=>state.fetch.selectedCategory)
 
@@ -17,7 +16,14 @@ const NewArivals = () => {
       
       dispatch(selectedCategories(e.target.textContent))
     }
-   
+    useEffect(()=>{
+      dispatch(fetchData(showMore));
+    },[dispatch,showMore])
+   const handleShowMore = ()=>{
+    dispatch(showMoreClick())
+    console.log(showMore);
+    
+   }
     
   return (
     <div className="flex flex-col items-center justify-center " >
@@ -37,6 +43,9 @@ const NewArivals = () => {
         </div>
         <div className='w-[80%] flex flex-row flex-wrap h-auto mt-10'>
             <Cards/>
+        </div>
+        <div className='flex justify-center items-center'>
+          <button onClick={()=>handleShowMore()}  className='flex items-center justify-center p-[10px] rounded-[5px] hover:bg-gray-200 transition duration-400 ease-out border border-[#ebebeb]'>Show More</button>
         </div>
     </div>
   )
