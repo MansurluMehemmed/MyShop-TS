@@ -16,7 +16,7 @@ const Slider = () => {
       
       loop={true}
     >
-      <SwiperSlide className=" w-full h-screen bg-[url(https://themewagon.github.io/coloshop/images/slider_1.jpg)] bg-cover bg-center bg-repeat ">
+      <SwiperSlide className=" w-full mt-[100px] h-screen bg-[url(https://themewagon.github.io/coloshop/images/slider_1.jpg)] bg-cover bg-center bg-repeat ">
         <div className=" w-[80%] flex h-screen justify-center items-center">
           <div className="md:gap-4 flex flex-col gap-8  w-[60%] h-auto">
             <p className=" sm:text-[18px] md:text-xl  ">
@@ -31,7 +31,7 @@ const Slider = () => {
           </div>
         </div>
       </SwiperSlide>
-      <SwiperSlide className=" w-full h-screen bg-[url(https://themewagon.github.io/coloshop/images/slider_1.jpg)] bg-cover bg-center bg-repeat ">
+      <SwiperSlide className=" w-full h-screen mt-[100px] bg-[url(https://themewagon.github.io/coloshop/images/slider_1.jpg)] bg-cover bg-center bg-repeat ">
         <div className=" w-[80%] flex h-screen justify-center items-center">
           <div className="md:gap-4 flex flex-col gap-8  w-[60%] h-auto">
             <p className=" sm:text-[18px] md:text-xl  ">

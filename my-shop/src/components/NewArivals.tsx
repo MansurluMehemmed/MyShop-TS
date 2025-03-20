@@ -20,9 +20,7 @@ const NewArivals = () => {
       dispatch(fetchData(showMore));
     },[dispatch,showMore])
    const handleShowMore = ()=>{
-    dispatch(showMoreClick())
-    console.log(showMore);
-    
+    dispatch(showMoreClick())    
    }
     
   return (
@@ -41,7 +39,7 @@ const NewArivals = () => {
             </ul>
 
         </div>
-        <div className='w-[80%] flex flex-row flex-wrap h-auto mt-10'>
+        <div className='w-[80%] flex flex-row flex-wrap  h-auto mt-10'>
             <Cards/>
         </div>
         <div className='flex justify-center items-center'>

@@ -7,13 +7,12 @@ import { fetchData } from "../State/FetchSlice";
 
 const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
-  let {  data,isLoading, error,showMore } = useSelector(
+  let {  data,isLoading, error,showMore,seachQuery } = useSelector(
     (state: RootState) => state.fetch
   );
   const selectedCategory = useSelector(
     (state: RootState) => state.fetch.selectedCategory
   );
-
   useEffect(() => {
     dispatch(fetchData(showMore));
   }, [dispatch]);
@@ -24,6 +23,9 @@ const Cards = () => {
     }
     else{
       data = data
+    }
+    if(seachQuery){
+      data = data.filter((product)=>product.title.toUpperCase().includes(seachQuery.toUpperCase()))
     }
     return data
   }
@@ -36,7 +38,7 @@ const Cards = () => {
         key={item.id}
        
           
-          className="flex group  relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col w-[20%] hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
+          className="   flex  relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col w-[20%] hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
         >
           <div className="w-full flex  ">
             <img
@@ -56,8 +58,10 @@ const Cards = () => {
               {item.title}
             </Link>
             <div className="flex  flex-row gap-[15px] justify-around items-center text-[14px]">
-              <p className="text-red-600 ">${item.discountPercentage}</p>
-              <span className="text-[#b5aec4} line-through">${item.price}</span>
+              <p className={`text-[#b5aec4} ${item.discountPercentage? "line-through":''} `}>${item.price}</p>
+              {item.discountPercentage && (
+                      <span className="text-red-600">${(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}</span>)}
+              
             </div>
           </div>
 

@@ -19,6 +19,7 @@ export interface CardState {
   error: boolean;
   selectedCategory:string;
   showMore:number
+  seachQuery:string
 }
 
 const initialState: CardState = {
@@ -27,7 +28,8 @@ const initialState: CardState = {
   isLoading: false,
   error: false,
   selectedCategory:'ALL',
-  showMore:10
+  showMore:10,
+  seachQuery:''
 };
 
 
@@ -64,6 +66,9 @@ export const FetchSlice = createSlice({
     },
     showMoreClick:(state)=>{
       state.showMore +=5
+    },
+    setSearchQuery:(state,action)=>{
+      state.seachQuery = action.payload
     }
   },
   extraReducers: (builder) => {
@@ -83,5 +88,5 @@ export const FetchSlice = createSlice({
     });
   },
 });
-export const  {selectedCategories,showMoreClick} = FetchSlice.actions
+export const  {selectedCategories,showMoreClick,setSearchQuery} = FetchSlice.actions
 export default FetchSlice.reducer;
