@@ -1,26 +1,27 @@
-import { BrowserRouter as Router } from "react-router-dom"
-import Navbar from "./components/Navbar"
-import Slider from "./components/Slider"
-import NewArivals from "./components/NewArivals"
-import BestSellers from "./components/BestSellers/BestSellers"
-import Footer from "./components/Footer"
+import { Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
 
+import Payment from "./components/Payment";
+import Slider from "./components/Slider";
+import NewArivals from "./components/NewArivals";
+import Footer from "./components/Footer";
 
 function App() {
-  
   return (
-    <Router>
-        <div>
-          <Navbar/>
+   <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={
+          <div>
+          <Slider />
+          <NewArivals />
+          <Footer />
         </div>
-        <div>
-          <Slider/>
-        </div>
-        <NewArivals/>
-        {/* <BestSellers/> */}
-        <Footer/>
-    </Router>
-  )
+        } />
+        <Route path="/isOrdered" element={<Payment />} />
+      </Routes>
+    </>
+  );
 }
 
-export default App
+export default App;

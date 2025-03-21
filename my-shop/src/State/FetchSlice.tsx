@@ -84,7 +84,7 @@ export const FetchSlice = createSlice({
         state.basketData[i].count++
         state.basketData = [...state.basketData]
       }else{
-        state.basketData = [...state.basketData,action.payload]
+        state.basketData = [action.payload,...state.basketData]
       }
       
     },
@@ -99,10 +99,19 @@ export const FetchSlice = createSlice({
         state.basketData[i].count !==1&& state.basketData[i].count--
         state.basketData = [...state.basketData]
       }else{
-        state.basketData = [...state.basketData,action.payload]
+        state.basketData = [action.payload,...state.basketData]
       }
+    },
+    deleteProducts:(state,action)=>{
+      state.basketData = state.basketData.filter(product=>product.id!==action.payload)
+
+      
+    },
+    deleteAll:(state)=>{
+      state.basketData = []
     }
   },
+ 
   extraReducers: (builder) => {
     builder.addCase(fetchData.pending, (state) => {
       state.isLoading = true;
@@ -120,5 +129,5 @@ export const FetchSlice = createSlice({
     });
   },
 });
-export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease} = FetchSlice.actions
+export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease,deleteAll,deleteProducts} = FetchSlice.actions
 export default FetchSlice.reducer;

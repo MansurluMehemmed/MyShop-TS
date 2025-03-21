@@ -7,9 +7,9 @@ import {
   FaUser,
   FaUserPlus,
 } from "react-icons/fa";
-import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
-import { AppDispatch } from "../State/store";
+import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-scroll";
+import { AppDispatch, RootState } from "../State/store";
 import { setSearchQuery } from "../State/FetchSlice";
 import Basket from "./Basket";
 
@@ -18,7 +18,7 @@ const Navbar = () => {
   const [basketMenu,setBasketMenu] = useState(false)
   const [menu, setMenu] = useState(false);
   const [isVisible,setIsVisible] = useState(false)
-
+  const {basketData} = useSelector((state:RootState)=>state.fetch)
   const handleChange = () => {
     setMenu(!menu);
   };
@@ -30,47 +30,49 @@ const Navbar = () => {
     <header className="flex  fixed z-20 mb-[100px] bg-white flex-row w-full h-[100px] justify-center">
       <nav className=" flex relative w-[80%] justify-between items-center ">
         <div>
-          <Link to="home">
-            <h1 className="font-bold text-3xl text-black">
-              {" "}
+          <Link to="/">
+            <h1 className="font-bold text-3xl cursor-pointer text-black">
+              
               My<span className="text-red-600">Shop</span>
             </h1>
           </Link>
         </div>
         <nav className="hidden md:flex flex-row  items-center gap-10 text-xl font-medium ">
           <Link
-            to="home"
-            className=" hover:text-gray-400 transition duration-300 ease-in-out"
+            to="/"
+            className=" hover:text-gray-400 cursor-pointer transition duration-300 ease-in-out"
           >
             Home
           </Link>
           <Link
             to="shop"
-            className="hover:text-gray-400 transition duration-300 ease-in-out "
+            className="hover:text-gray-400 cursor-pointer transition duration-300 ease-in-out "
           >
             Shop
           </Link>
           <Link
             to="blog"
-            className="hover:text-gray-400 transition duration-300 ease-in-out "
+            className="hover:text-gray-400 cursor-pointer transition duration-300 ease-in-out "
           >
             Blog
           </Link>
           <Link
             to="contact"
-            className="hover:text-gray-300 transition duration-300 ease-in-out"
+            className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out"
           >
             Contact
           </Link>
         </nav>
         <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center   ">
-          <div className="flex cursor-pointer">
-            <Search onClick={()=>setIsVisible(!isVisible)} className="w-5 h-5 hover:text-gray-500" />
+          <div className="flex cursor-pointer items-center">
+            <Search onClick={()=>setIsVisible(!isVisible)}  className="w-5 h-5 hover:text-gray-500 " />
+            <Link to='search' smooth={true} duration={500} >
             <input onChange={(e)=>dispatch(setSearchQuery(e.target.value))}
               type="text"
               placeholder="Search..."
               className={`ml-2 ${isVisible?'flex':'hidden'} outline-none`}
             />
+            </Link>
           </div>
           <div className="flex  cursor-pointer">
             <FaUser className= "hover:text-gray-500 " />
@@ -87,12 +89,14 @@ const Navbar = () => {
           </div>
           <div onClick={()=>setBasketMenu(!basketMenu)} className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] bg-gray-300">
             <FaShoppingCart  className="hover:text-gray-500 " />
-            <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 text-[15px] text-white items-center justify-center w-4">
-              1
-            </span>
+           {basketData.length!==0&&
+           <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 text-[15px] text-white items-center justify-center w-4">
+           {basketData.length}
+         </span> 
+          }
             
           </div>
-          {basketMenu&& <Basket />}
+          {basketMenu&& <Basket setBasketMenu={setBasketMenu} />}
             
           <div className="md:hidden cursor-pointer flex">
             {menu ? (

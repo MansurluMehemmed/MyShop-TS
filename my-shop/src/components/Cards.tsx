@@ -34,7 +34,7 @@ const Cards = () => {
     <>
       
       {filteredProducts.map((item) => (
-        <div
+        <div 
         key={item.id}
        
           
