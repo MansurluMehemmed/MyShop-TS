@@ -1,9 +1,7 @@
 
-// const Button= ({title}:string) => {
+// const Button= ({title}:{title:string}) => {
 //   return (
-//     <button className="text-white w- bg-red-500 flex items-center justify-center transition duration-200 ease-linear cursor-pointer px-5 py-2 rounded hover:shadow-[rgba(0, 0, 0, .01) 0 0 1px] ">{title}
-
-//     </button>
+//     <button className="w-full bg-[#7c62e3] transition duration-300 hover:bg-[#9783e8] text-white  py-[10px] ">{title}</button>
 //   )
 // }
 

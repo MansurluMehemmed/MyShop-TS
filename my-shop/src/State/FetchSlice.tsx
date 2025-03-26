@@ -10,7 +10,10 @@ export interface Product {
   discountPercentage:number;
   category:string;
   brand:string,
-  count:number
+  count:number,
+  rating:string,
+  images:string[]
+
 }
 
 export interface CardState {
@@ -22,6 +25,7 @@ export interface CardState {
   showMore:number
   seachQuery:string
   basketData:Product[]
+  productPageData:Product[]
 }
 
 const initialState: CardState = {
@@ -32,7 +36,8 @@ const initialState: CardState = {
   selectedCategory:'ALL',
   showMore:10,
   seachQuery:'',
-  basketData:[]
+  basketData:[],
+  productPageData:[]
 };
 
 
@@ -109,6 +114,9 @@ export const FetchSlice = createSlice({
     },
     deleteAll:(state)=>{
       state.basketData = []
+    },
+    productPageElement:(state,action)=>{
+      state.productPageData = state.data.filter(product=>product.id ===action.payload)
     }
   },
  
@@ -129,5 +137,5 @@ export const FetchSlice = createSlice({
     });
   },
 });
-export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease,deleteAll,deleteProducts} = FetchSlice.actions
+export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease,deleteAll,deleteProducts,productPageElement} = FetchSlice.actions
 export default FetchSlice.reducer;

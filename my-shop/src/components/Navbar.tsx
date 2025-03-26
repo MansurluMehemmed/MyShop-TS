@@ -1,5 +1,5 @@
 import { Search } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { AiOutlineClose, AiOutlineMenuFold } from "react-icons/ai";
 import {
   FaShoppingCart,
@@ -16,15 +16,34 @@ import Basket from "./Basket";
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>()
   const [basketMenu,setBasketMenu] = useState(false)
+  const basketRef = useRef<HTMLDivElement>(null);
   const [menu, setMenu] = useState(false);
   const [isVisible,setIsVisible] = useState(false)
   const {basketData} = useSelector((state:RootState)=>state.fetch)
   const handleChange = () => {
     setMenu(!menu);
   };
+
   const closeMenu = () => {
     setMenu(false);
   };
+  const toggleBasket = ()=>{
+    setBasketMenu(!basketMenu)
+  }
+  // console.log(basketRef);
+  
+  // useEffect(()=>{
+  //   const handleClickOutside= (e:MouseEvent)=>{
+  //     if(basketRef.current && !basketRef.current.contains(e.target as Node)){
+  //      setBasketMenu(false) 
+  //     }
+
+  //   }
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // },[])
 
   return (
     <header className="flex  fixed z-20 mb-[100px] bg-white flex-row w-full h-[100px] justify-center">
@@ -87,7 +106,7 @@ const Navbar = () => {
               </p>
             </div>
           </div>
-          <div onClick={()=>setBasketMenu(!basketMenu)} className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] bg-gray-300">
+          <div onClick={()=>toggleBasket()} className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] bg-gray-300">
             <FaShoppingCart  className="hover:text-gray-500 " />
            {basketData.length!==0&&
            <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 text-[15px] text-white items-center justify-center w-4">

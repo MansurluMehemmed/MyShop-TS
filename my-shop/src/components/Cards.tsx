@@ -3,7 +3,7 @@ import { AppDispatch, RootState } from "../State/store";
 import FavoriButton from "../layouts/FavoriButton";
 import { Link } from "react-router-dom";
 import { useEffect} from "react";
-import { add, fetchData } from "../State/FetchSlice";
+import { add, fetchData, productPageElement } from "../State/FetchSlice";
 
 const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -52,8 +52,9 @@ const Cards = () => {
           </div>
           <div className="flex flex-col px-[10px] items-center justify-center">
             <Link
-              to="/ProductInfo"
+              to={`/productpage/${item.id}`}
               className="text-[#1e1e27] hover:text-gray-500 flex items-center justify-center h-[55px] text-[18px]"
+              onClick={()=>{dispatch(productPageElement(item.id))}}
             >
               {item.title}
             </Link>

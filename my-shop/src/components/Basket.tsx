@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
 import { add, decrease, deleteAll, deleteProducts } from "../State/FetchSlice";
 import { Link } from "react-router-dom";
+import { useEffect } from "react";
 
 interface ChildProps {
   setBasketMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -16,7 +17,7 @@ const Basket: React.FC<ChildProps> = ({ setBasketMenu }) => {
     let productTotal = item.count * item.price;
     total = Number((total + productTotal).toFixed(2));
   });
-
+  
   return (
     <>
       <div className="flex py-5  rounded-xl flex-col gap-10 bg-[#ebebeb]  w-[600px] top-18 right-[15px] transition-all duration-1000 absolute z-25 h-auto max-h-[500px]">
@@ -103,7 +104,7 @@ const Basket: React.FC<ChildProps> = ({ setBasketMenu }) => {
             <Link to="/isOrdered">
               <button
                 onClick={() => setBasketMenu(false)}
-                className="bg-green-500 rounded p-[6px] transition duration-500 text-white hover:bg-green-400 "
+                className="bg-[#7c62e3] rounded p-[6px] transition duration-500 text-white hover:bg-[#a791ff] "
               >
                 Ordered
               </button>
