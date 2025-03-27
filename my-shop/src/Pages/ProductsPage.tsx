@@ -19,12 +19,13 @@ const ProductsPage = () => {
  
   return (
     <div className="w-full flex justify-center items-center top-[100px] absolute">
-        <button onClick={()=>navigate(-1)} className=" flex justify-self-start self-start px-5 py-2 bg-red-600 text-white rounded cursor-pointer">Back</button>
+        
       {productPageData.map((product) => (
         
         
-        <div key={product.id} className="flex w-[80%] gap-10 flex-row">
-          <div className="flex w-[50%] h-screen">
+        <div key={product.id} className="flex w-[80%] flex-col relative md:flex-row gap-10 ">
+            <button onClick={()=>navigate(-1)} className=" flex fixed z-30 left-20 justify-self-start self-start px-5 py-2 bg-red-600 text-white rounded cursor-pointer">Back</button>
+          <div className="flex w-full mx-[10px] md:w-[50%] md:mx-0 h-screen">
             <Swiper
               className="mb-10"
               spaceBetween={50}
@@ -48,7 +49,7 @@ const ProductsPage = () => {
               ))}
             </Swiper>
           </div>
-          <div className="flex w-[50%] flex-col ">
+          <div className="flex w-full md:w-[50%] flex-col ">
             <h2 className="font-semibold text-2xl mb-[10px]">
               {product.title}
             </h2>
@@ -85,7 +86,7 @@ const ProductsPage = () => {
               Order it
             </button>
 
-            <div className="flex flex-col p-5 gap-[5px] w-full shadow bg-white">
+            <div className="flex flex-col p-5 gap-[5px] mt-10 w-full shadow bg-white">
               <p className="font-semibold">Product information:</p>
               <p>Brand: {product.brand}</p>
               <p>Warranty Information : {product.warrantyInformation}</p>

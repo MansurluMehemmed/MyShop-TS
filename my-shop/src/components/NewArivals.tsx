@@ -40,10 +40,12 @@ const NewArivals = () => {
 
         </div>
         <div  className='w-[80%] flex flex-row flex-wrap  h-auto mt-10'>
+          <div className='grid grid-cols-1  max-sm:grid-cols-2 gap-0 max-lg:gap-[10px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5   px-0 md:px-10 '>
             <Cards/>
+          </div>
         </div>
         <div className='flex justify-center items-center'>
-          <button onClick={()=>handleShowMore()}  className='flex items-center justify-center p-[10px] rounded-[5px] hover:bg-gray-200 transition duration-400 ease-out border border-[#ebebeb]'>Show More</button>
+          <button onClick={()=>handleShowMore()}  className='flex mt-5 items-center justify-center p-[10px] rounded-[5px] hover:bg-gray-200 transition duration-400 ease-out border border-[#ebebeb]'>Show More</button>
         </div>
     </div>
   )

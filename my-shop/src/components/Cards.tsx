@@ -39,7 +39,7 @@ const Cards = () => {
         key={item.id}
        
           
-          className="   flex group relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col w-[20%] hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
+          className="   flex group relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col  hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
         >
           <div className="w-full flex  ">
             <img
@@ -67,7 +67,7 @@ const Cards = () => {
             </div>
           </div>
 
-          <button onClick={()=>dispatch(add({...item,count:1}))} className="text-white mt-[20px] h-[40px] group-hover:bg-red-500 flex items-center justify-center hover:bg-red-400 transition duration-200 ease-linear w-full text-[12px] font-semibold">
+          <button onClick={()=>dispatch(add({...item,count:1}))} className="text-white gap-0 bg-white max-lg:bg-red-500 mt-[20px] h-[40px] group-hover:bg-red-500 flex items-center justify-center hover:bg-red-400 transition duration-200 ease-linear w-full text-[12px] font-semibold">
             ADD TO CARD
           </button>
         </div>

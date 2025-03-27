@@ -4,7 +4,7 @@ const Rating = () => {
     <div className="rating ">
     <input value="5" name="rate" id="star5" type="radio"/>
     <label title="text" htmlFor="star5"></label>
-    <input value="4" name="rate" id="star4" type="radio" checked/>
+    <input value="4" name="rate" id="star4" type="radio" />
     <label title="text" htmlFor="star4"></label>
     <input value="3" name="rate" id="star3" type="radio" />
     <label title="text" htmlFor="star3"></label>
