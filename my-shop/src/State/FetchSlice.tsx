@@ -1,5 +1,13 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-
+import { Activity } from "lucide-react";
+import FavoriProducts from "../Pages/FavoriProducts";
+interface Review {
+  rating: number;  
+  comment: string;  
+  date: string;  
+  reviewerName: string;  
+  reviewerEmail: string;  
+}
 // API-dən gələn məlumatın strukturunu müəyyən edən interfeys
 export interface Product {
   id: number;
@@ -13,7 +21,11 @@ export interface Product {
   count:number,
   rating:string,
   images:string[]
-
+  availabilityStatus:string
+  shippingInformation:string
+  warrantyInformation:string
+  returnPolicy:string
+  rewiews:Review[]
 }
 
 export interface CardState {
@@ -26,6 +38,7 @@ export interface CardState {
   seachQuery:string
   basketData:Product[]
   productPageData:Product[]
+  favoriteProducts:Product[]
 }
 
 const initialState: CardState = {
@@ -37,7 +50,8 @@ const initialState: CardState = {
   showMore:10,
   seachQuery:'',
   basketData:[],
-  productPageData:[]
+  productPageData:[],
+  favoriteProducts:[]
 };
 
 
@@ -117,6 +131,12 @@ export const FetchSlice = createSlice({
     },
     productPageElement:(state,action)=>{
       state.productPageData = state.data.filter(product=>product.id ===action.payload)
+    },
+    addFavorite:(state,action)=>{
+      state.favoriteProducts = [...state.favoriteProducts,action.payload]
+    },
+    deleteFavorite:(state,action)=>{
+      state.favoriteProducts = state.favoriteProducts.filter(product=>product.id === action.payload)
     }
   },
  
@@ -137,5 +157,5 @@ export const FetchSlice = createSlice({
     });
   },
 });
-export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease,deleteAll,deleteProducts,productPageElement} = FetchSlice.actions
+export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease,deleteAll,deleteProducts,productPageElement,addFavorite,deleteFavorite} = FetchSlice.actions
 export default FetchSlice.reducer;

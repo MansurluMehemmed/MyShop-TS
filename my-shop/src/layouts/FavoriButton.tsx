@@ -1,13 +1,24 @@
-import './FavoriButton.css'
+import { FaRegHeart } from 'react-icons/fa'
+import { AiFillHeart } from 'react-icons/ai'
+import {  useState } from 'react'
+import { useDispatch } from 'react-redux'
+import { AppDispatch } from '../State/store'
+import { addFavorite } from '../State/FetchSlice'
 const FavoriButton = () => {
+  const [active,setActive] = useState(false)
+  const dispatch = useDispatch<AppDispatch>()
   return (
     <div>
-        <label className="ui-like">
-    <input type="checkbox"/>
-    <div className="like">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill=""><g strokeWidth="0" id="SVGRepo_bgCarrier"></g><g strokeLinejoin="round" strokeLinecap="round" id="SVGRepo_tracerCarrier"></g><g id="SVGRepo_iconCarrier"><path d="M20.808,11.079C19.829,16.132,12,20.5,12,20.5s-7.829-4.368-8.808-9.421C2.227,6.1,5.066,3.5,8,3.5a4.444,4.444,0,0,1,4,2,4.444,4.444,0,0,1,4-2C18.934,3.5,21.773,6.1,20.808,11.079Z"></path></g></svg>
+        
+    <div onClick={()=>{
+      setActive(!active)
+      if(active){
+        
+      }
+    }} className="like relative">
+        <FaRegHeart className={`absolute ${active?"text-red-600":''}`}/>
+        <AiFillHeart className={`text-red-600 ${active?'flex':'hidden'}  `}/>
        </div>
-  </label>
     </div>
   )
 }

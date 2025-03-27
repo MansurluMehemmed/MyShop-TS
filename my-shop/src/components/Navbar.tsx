@@ -1,7 +1,11 @@
 import { Search } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
-import { AiOutlineClose, AiOutlineMenuFold } from "react-icons/ai";
+import { AiFillLike, AiOutlineClose, AiOutlineMenuFold } from "react-icons/ai";
 import {
+  FaHeart,
+  FaHeartbeat,
+  FaHeartBroken,
+  FaRegHeart,
   FaShoppingCart,
   FaSignInAlt,
   FaUser,
@@ -12,14 +16,15 @@ import { Link } from "react-scroll";
 import { AppDispatch, RootState } from "../State/store";
 import { setSearchQuery } from "../State/FetchSlice";
 import Basket from "./Basket";
+import FavoriButton from "../layouts/FavoriButton";
 
 const Navbar = () => {
-  const dispatch = useDispatch<AppDispatch>()
-  const [basketMenu,setBasketMenu] = useState(false)
+  const dispatch = useDispatch<AppDispatch>();
+  const [basketMenu, setBasketMenu] = useState(false);
   const basketRef = useRef<HTMLDivElement>(null);
   const [menu, setMenu] = useState(false);
-  const [isVisible,setIsVisible] = useState(false)
-  const {basketData} = useSelector((state:RootState)=>state.fetch)
+  const [isVisible, setIsVisible] = useState(false);
+  const { basketData } = useSelector((state: RootState) => state.fetch);
   const handleChange = () => {
     setMenu(!menu);
   };
@@ -27,15 +32,15 @@ const Navbar = () => {
   const closeMenu = () => {
     setMenu(false);
   };
-  const toggleBasket = ()=>{
-    setBasketMenu(!basketMenu)
-  }
+  const toggleBasket = () => {
+    setBasketMenu(!basketMenu);
+  };
   // console.log(basketRef);
-  
+
   // useEffect(()=>{
   //   const handleClickOutside= (e:MouseEvent)=>{
   //     if(basketRef.current && !basketRef.current.contains(e.target as Node)){
-  //      setBasketMenu(false) 
+  //      setBasketMenu(false)
   //     }
 
   //   }
@@ -51,7 +56,6 @@ const Navbar = () => {
         <div>
           <Link to="/">
             <h1 className="font-bold text-3xl cursor-pointer text-black">
-              
               My<span className="text-red-600">Shop</span>
             </h1>
           </Link>
@@ -84,17 +88,26 @@ const Navbar = () => {
         </nav>
         <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center   ">
           <div className="flex cursor-pointer items-center">
-            <Search onClick={()=>setIsVisible(!isVisible)}  className="w-5 h-5 hover:text-gray-500 " />
-            <Link to='search' smooth={true} duration={500} >
-            <input onChange={(e)=>dispatch(setSearchQuery(e.target.value))}
-              type="text"
-              placeholder="Search..."
-              className={`ml-2 ${isVisible?'flex':'hidden'} outline-none`}
+            <Search
+              onClick={() => setIsVisible(!isVisible)}
+              className="w-5 h-5 hover:text-gray-500 "
             />
+            <Link to="search" smooth={true} duration={500}>
+              <input
+                onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+                type="text"
+                placeholder="Search..."
+                className={`ml-2 ${isVisible ? "flex" : "hidden"} outline-none`}
+              />
             </Link>
           </div>
+          
+            <Link to="/favorites" className="cursor-pointer hover:text-gray-500">
+              <FaRegHeart />
+            </Link>
+          
           <div className="flex  cursor-pointer">
-            <FaUser className= "hover:text-gray-500 " />
+            <FaUser className="hover:text-gray-500 " />
             <div className="hidden absolute left-4 z-10 px-2 py-2 top-3 w-[150px] cursor-pointer bg-amber-50 ">
               <p className="hover:text-gray-500 flex gap-2 items-center border-b-black ">
                 <FaSignInAlt />
@@ -106,17 +119,19 @@ const Navbar = () => {
               </p>
             </div>
           </div>
-          <div onClick={()=>toggleBasket()} className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] bg-gray-300">
-            <FaShoppingCart  className="hover:text-gray-500 " />
-           {basketData.length!==0&&
-           <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 text-[15px] text-white items-center justify-center w-4">
-           {basketData.length}
-         </span> 
-          }
-            
+          <div
+            onClick={() => toggleBasket()}
+            className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] bg-gray-300"
+          >
+            <FaShoppingCart className="hover:text-gray-500 " />
+            {basketData.length !== 0 && (
+              <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 text-[15px] text-white items-center justify-center w-4">
+                {basketData.length}
+              </span>
+            )}
           </div>
-          {basketMenu&& <Basket setBasketMenu={setBasketMenu} />}
-            
+          {basketMenu && <Basket setBasketMenu={setBasketMenu} />}
+
           <div className="md:hidden cursor-pointer flex">
             {menu ? (
               <AiOutlineClose size={25} onClick={handleChange} />

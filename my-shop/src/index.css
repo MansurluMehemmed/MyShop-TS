@@ -1,7 +1,9 @@
 @import "tailwindcss";
 
 body{
-  font-family:inherit
+  font-family:inherit;
+  position: relative;
+  
 }
 button{cursor: pointer;}
 .active {

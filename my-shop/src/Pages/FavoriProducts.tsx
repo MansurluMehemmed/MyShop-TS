@@ -1,40 +1,26 @@
-import { useSelector, useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../State/store";
-import FavoriButton from "../layouts/FavoriButton";
-import { Link } from "react-router-dom";
-import { useEffect} from "react";
-import { add, addFavorite, fetchData, productPageElement } from "../State/FetchSlice";
+import React, { useEffect } from 'react'
+import { add, fetchData, productPageElement } from '../State/FetchSlice';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../State/store';
+import FavoriButton from '../layouts/FavoriButton';
+import { Link } from 'react-router-dom';
 
-const Cards = () => {
-  const dispatch = useDispatch<AppDispatch>();
-  let {  data,isLoading, error,showMore,seachQuery,favoriteProducts } = useSelector(
+const FavoriProducts = () => {
+    const dispatch = useDispatch<AppDispatch>();
+  const  {  showMore,favoriteProducts } = useSelector(
     (state: RootState) => state.fetch
   );
-  console.log(favoriteProducts);
-  const selectedCategory = useSelector(
-    (state: RootState) => state.fetch.selectedCategory
-  );
+  
   useEffect(() => {
     dispatch(fetchData(showMore));
   }, [dispatch]);
   
-  const getFilteredProducts = ()=>{
-    if(selectedCategory!=='ALL'){
-      data = data.filter(product=>product.category.toUpperCase()===selectedCategory)
-    }
-    else{
-      data = data
-    }
-    if(seachQuery){
-      data = data.filter((product)=>product.title.toUpperCase().includes(seachQuery.toUpperCase()))
-    }
-    return data
-  }
-  const filteredProducts = getFilteredProducts()
+  
   return (
     <>
-      
-      {filteredProducts.map((item) => (
+    {favoriteProducts.map((item)=>(
+        <div className='flex w-full h-full justify-center items-center'>
+        <div className='w-[80%] flex '>
         <div 
         key={item.id}
        
@@ -48,8 +34,8 @@ const Cards = () => {
               className="w-full h-auto "
             />
           </div>
-          <div onClick={()=>dispatch(addFavorite({...item}))}  className="absolute z-10 top-[15px] left-[15px] ">
-            <FavoriButton  />
+          <div className="absolute z-10 top-[15px] left-[15px] ">
+            <FavoriButton />
           </div>
           <div className="flex flex-col px-[10px] items-center justify-center">
             <Link
@@ -71,9 +57,11 @@ const Cards = () => {
             ADD TO CARD
           </button>
         </div>
-      ))}
+        </div>
+    </div>
+    ))}
     </>
-  );
-};
+  )
+}
 
-export default Cards;
+export default FavoriProducts
