@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { add, fetchData, productPageElement } from '../State/FetchSlice';
+import { add, addFavorite, fetchData, productPageElement } from '../State/FetchSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../State/store';
 import FavoriButton from '../layouts/FavoriButton';
@@ -11,16 +11,13 @@ const FavoriProducts = () => {
     (state: RootState) => state.fetch
   );
   
-  useEffect(() => {
-    dispatch(fetchData(showMore));
-  }, [dispatch]);
-  
   
   return (
-    <>
+   
+    <div className='flex w-full h-full justify-center items-center  mt-[100px] absolute'>
+      <div className='w-[80%] flex flex-row'>
     {favoriteProducts.map((item)=>(
-        <div className='flex w-full h-full justify-center items-center'>
-        <div className='w-[80%] flex '>
+        
         <div 
         key={item.id}
        
@@ -34,8 +31,8 @@ const FavoriProducts = () => {
               className="w-full h-auto "
             />
           </div>
-          <div className="absolute z-10 top-[15px] left-[15px] ">
-            <FavoriButton />
+          <div onClick={()=>dispatch(addFavorite({...item}))} className="absolute z-10 top-[15px] left-[15px] ">
+            <FavoriButton  />
           </div>
           <div className="flex flex-col px-[10px] items-center justify-center">
             <Link
@@ -57,10 +54,10 @@ const FavoriProducts = () => {
             ADD TO CARD
           </button>
         </div>
-        </div>
-    </div>
+       
     ))}
-    </>
+     </div>
+    </div>
   )
 }
 

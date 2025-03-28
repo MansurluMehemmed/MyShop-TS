@@ -4,6 +4,7 @@ import { AppDispatch, RootState } from "../State/store";
 import { add, decrease, deleteAll, deleteProducts } from "../State/FetchSlice";
 import { Link } from "react-router-dom";
 import { useEffect } from "react";
+import { FaRegHeart } from "react-icons/fa";
 
 interface ChildProps {
   setBasketMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -88,7 +89,7 @@ const Basket: React.FC<ChildProps> = ({ setBasketMenu }) => {
             ))
           )}
         </ul>
-
+        
         <div className="flex px-5 justify-between items-center  w-full ">
           <h6>Total Price: {total}$</h6>
           <div className="flex gap-2">

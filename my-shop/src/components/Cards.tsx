@@ -2,11 +2,12 @@ import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
 import FavoriButton from "../layouts/FavoriButton";
 import { Link } from "react-router-dom";
-import { useEffect} from "react";
+import { useEffect, useState} from "react";
 import { add, addFavorite, fetchData, productPageElement } from "../State/FetchSlice";
 
 const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [but,setBut] = useState(false)
   let {  data,isLoading, error,showMore,seachQuery,favoriteProducts } = useSelector(
     (state: RootState) => state.fetch
   );
@@ -49,7 +50,7 @@ const Cards = () => {
             />
           </div>
           <div onClick={()=>dispatch(addFavorite({...item}))}  className="absolute z-10 top-[15px] left-[15px] ">
-            <FavoriButton  />
+            <FavoriButton/>
           </div>
           <div className="flex flex-col px-[10px] items-center justify-center">
             <Link

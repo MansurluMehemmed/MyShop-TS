@@ -17,6 +17,7 @@ import { AppDispatch, RootState } from "../State/store";
 import { setSearchQuery } from "../State/FetchSlice";
 import Basket from "./Basket";
 import FavoriButton from "../layouts/FavoriButton";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -54,37 +55,37 @@ const Navbar = () => {
     <header className="flex  fixed z-20 mb-[100px] bg-white flex-row w-full h-[100px] justify-center">
       <nav className=" flex relative w-[80%] justify-between items-center ">
         <div>
-          <Link to="/">
+          <NavLink to="/">
             <h1 className="font-bold text-3xl cursor-pointer text-black">
               My<span className="text-red-600">Shop</span>
             </h1>
-          </Link>
+          </NavLink>
         </div>
         <nav className="hidden md:flex flex-row  items-center gap-10 text-xl font-medium ">
-          <Link
+          <NavLink
             to="/"
             className=" hover:text-gray-400 cursor-pointer transition duration-300 ease-in-out"
           >
             Home
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="shop"
             className="hover:text-gray-400 cursor-pointer transition duration-300 ease-in-out "
           >
             Shop
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="blog"
             className="hover:text-gray-400 cursor-pointer transition duration-300 ease-in-out "
           >
             Blog
-          </Link>
-          <Link
+          </NavLink>
+          <NavLink
             to="contact"
             className="hover:text-gray-300 cursor-pointer transition duration-300 ease-in-out"
           >
             Contact
-          </Link>
+          </NavLink>
         </nav>
         <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center   ">
           <div className="flex cursor-pointer items-center">
@@ -102,9 +103,9 @@ const Navbar = () => {
             </Link>
           </div>
           
-            <Link to="/favorites" className="cursor-pointer hover:text-gray-500">
+            <NavLink to="/favorites" className="cursor-pointer hover:text-gray-500">
               <FaRegHeart />
-            </Link>
+            </NavLink>
           
           <div className="flex  cursor-pointer">
             <FaUser className="hover:text-gray-500 " />
