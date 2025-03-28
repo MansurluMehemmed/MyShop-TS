@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const FavoriProducts = () => {
     const dispatch = useDispatch<AppDispatch>();
-  const  {  showMore,favoriteProducts } = useSelector(
+  const  {  favoriteProducts } = useSelector(
     (state: RootState) => state.fetch
   );
   
