@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+
 import { add, addFavorite, fetchData, productPageElement } from '../State/FetchSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../State/store';
@@ -14,8 +14,8 @@ const FavoriProducts = () => {
   
   return (
    
-    <div className='flex w-full h-full justify-center items-center  mt-[100px] absolute'>
-      <div className='w-[80%] flex flex-row'>
+    <div className='flex w-full h-full justify-center items-center  '>
+      <div className='w-[80%]  mt-[100px] flex flex-row'>
     {favoriteProducts.map((item)=>(
         
         <div 

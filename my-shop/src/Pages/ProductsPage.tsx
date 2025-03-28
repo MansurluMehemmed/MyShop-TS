@@ -1,10 +1,9 @@
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import { Autoplay } from "swiper/modules";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
-import { useEffect, useState } from "react";
 import { add } from "../State/FetchSlice";
 import Rating from "../layouts/Rating/Rating";
 import { MessageCircle } from "lucide-react";
@@ -18,13 +17,14 @@ const ProductsPage = () => {
   //    },[])
  
   return (
-    <div className="w-full flex justify-center items-center top-[100px] absolute">
-        
+    <div className="w-full flex justify-center items-center  ">
+        <div  className="flex w-[80%] flex-col mt-[100px] relative md:flex-row gap-10 ">
+        <button onClick={()=>navigate(-1)} className=" flex fixed z-30 left-20 justify-self-start self-start px-5 py-2 bg-red-600 text-white rounded cursor-pointer">Back</button>
       {productPageData.map((product) => (
         
         
-        <div key={product.id} className="flex w-[80%] flex-col relative md:flex-row gap-10 ">
-            <button onClick={()=>navigate(-1)} className=" flex fixed z-30 left-20 justify-self-start self-start px-5 py-2 bg-red-600 text-white rounded cursor-pointer">Back</button>
+        
+         <>
           <div className="flex w-full mx-[10px] md:w-[50%] md:mx-0 h-screen">
             <Swiper
               className="mb-10"
@@ -95,8 +95,10 @@ const ProductsPage = () => {
               <p>Return Policy : {product.returnPolicy}</p>
             </div>
           </div>
-        </div>
+         </>
+       
       ))}
+       </div>
     </div>
   );
 };

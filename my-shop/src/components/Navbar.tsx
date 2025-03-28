@@ -52,7 +52,7 @@ const Navbar = () => {
   // },[])
 
   return (
-    <header className="flex  fixed z-20 mb-[100px] bg-white flex-row w-full h-[100px] justify-center">
+    <header className="flex  fixed z-20 bg-white flex-row w-full h-[100px] justify-center">
       <nav className=" flex relative w-[80%] justify-between items-center ">
         <div>
           <NavLink to="/">

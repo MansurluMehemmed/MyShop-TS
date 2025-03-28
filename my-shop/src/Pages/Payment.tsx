@@ -7,9 +7,9 @@ const Payment = () => {
     const dispatch = useDispatch<AppDispatch>()
     const {basketData} = useSelector((state:RootState)=>state.fetch)
   return (
-    <div className="w-full flex flex-col items-center  bg-[#ebebeb] h-screen absolute mt-[100px]">
-        <div className="flex flex-col w-[60%] mt-10 min-h-[20%] bg-white justify-between">
-             <ul className="flex flex-col px-5 overflow-y-scroll gap-[10px] max-h-[400px] w-full m-0 p-0">
+    <div className="w-full flex flex-col items-center  bg-[#ebebeb] h-screen absolute ">
+        <div className="flex flex-col w-[60%] mt-[140px]  min-h-[20%] bg-white justify-between">
+             <ul className="flex flex-col px-5 overflow-y-scroll gap-[10px]  py-10 min-h-[100px]  w-full m-0 p-0">
                       {basketData.length === 0 ? (
                         <p className="text-[18px] flex self-center justify-self-center text-red-400">
                           The cart is empty.
