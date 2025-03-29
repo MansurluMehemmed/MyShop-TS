@@ -15,14 +15,15 @@ const FavoriProducts = () => {
   return (
    
     <div className='flex w-full h-full justify-center items-center  '>
-      <div className='w-[80%]  mt-[100px] flex flex-row'>
+      <div className='w-[80%]  mt-[100px]  grid grid-cols-1  max-sm:grid-cols-2 gap-0 max-lg:gap-[10px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5   px-0 md:px-10'>
     {favoriteProducts.map((item)=>(
         
-        <div 
+        <div className="flex flex-row w-full">
+          <div 
         key={item.id}
        
           
-          className="   flex group relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col w-[20%] hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
+          className="   flex  group relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col w-[20%] hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
         >
           <div className="w-full flex  ">
             <img
@@ -53,6 +54,7 @@ const FavoriProducts = () => {
           <button onClick={()=>dispatch(add({...item,count:1}))} className="text-white mt-[20px] h-[40px] group-hover:bg-red-500 flex items-center justify-center hover:bg-red-400 transition duration-200 ease-linear w-full text-[12px] font-semibold">
             ADD TO CARD
           </button>
+        </div>
         </div>
        
     ))}
