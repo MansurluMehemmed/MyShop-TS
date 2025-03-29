@@ -25,13 +25,13 @@ const NewArivals = () => {
     
   return (
     <div className="flex flex-col items-center justify-center " >
-        <h1 id="search"  className="text-[40px] font-semibold flex items-center justify-center">New Arrivals</h1>
-        <div  className="flex flex-row items-center justify-center w-auto mt-10">
-            <ul className="flex flex-row decoration-0  text-2xl p-0 m-0 items-center justify-center">
-            <li onClick={(e)=>handleClickCategory(e)} className={`h-[40px] min-w-[108px] px-[25px ] cursor-pointer ${selectedCategory==='ALL'? 'activee':''}  text-[14px]   border border-[#ebebeb] rounded-[3px] bg-white flex items-center justify-center `}>ALL</li>
+        <h1 id="search"  className="text-[40px] max-sm:text-[24px] font-semibold flex items-center justify-center">New Arrivals</h1>
+        <div  className="flex flex-row items-center justify-center w-auto mt-10 max-sm:mt-5">
+            <ul className="flex flex-row decoration-0 flex-wrap  text-2xl p-0 m-0 items-center justify-center">
+            <li onClick={(e)=>handleClickCategory(e)} className={`h-[40px] min-w-[108px] max-sm:h-[25px] max-sm:min-w-[70px] max-sm:px-[15px] px-[25px ] max-sm:text-[12px] cursor-pointer ${selectedCategory==='ALL'? 'activee':''}  text-[14px]   border border-[#ebebeb] rounded-[3px] bg-white flex items-center justify-center `}>ALL</li>
                 {
                   category.map((item,index)=>(
-                    <li id={item} key={index} onClick={(e)=>handleClickCategory(e)} className={`h-[40px] min-w-[108px] px-[25px ]  cursor-pointer text-[14px]   border border-[#ebebeb] rounded-[3px] bg-white flex items-center justify-center ${item===selectedCategory? 'activee':''} `}>{item}</li>
+                    <li id={item} key={index} onClick={(e)=>handleClickCategory(e)} className={`max-sm:h-[25px] max-sm:min-w-[70px] max-sm:px-[15px] max-sm:text-[12px] h-[40px] min-w-[108px] px-[25px ]  cursor-pointer text-[14px]   border border-[#ebebeb] rounded-[3px] bg-white flex items-center justify-center ${item===selectedCategory? 'activee':''} `}>{item}</li>
                   ))
                 }
                 
@@ -45,7 +45,7 @@ const NewArivals = () => {
           </div>
         </div>
         <div className='flex justify-center items-center'>
-          <button onClick={()=>handleShowMore()}  className='flex mt-5 items-center justify-center p-[10px] rounded-[5px] hover:bg-gray-200 transition duration-400 ease-out border border-[#ebebeb]'>Show More</button>
+          <button onClick={()=>handleShowMore()}  className='flex mt-5 items-center justify-center p-[10px] max-sm:text-[12px] max-sm:p-[5px] rounded-[5px] hover:bg-gray-200 transition duration-400 ease-out border border-[#ebebeb]'>Show More ...</button>
         </div>
     </div>
   )

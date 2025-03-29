@@ -55,20 +55,20 @@ const Cards = () => {
           <div className="flex flex-col px-[10px] items-center justify-center">
             <Link
               to={`/productpage/${item.id}`}
-              className="text-[#1e1e27] hover:text-gray-500 flex items-center justify-center h-[55px] text-[18px]"
+              className="text-[#1e1e27] hover:text-gray-500 flex max-sm:text-[13px] items-center justify-center h-[55px] text-[18px]"
               onClick={()=>{dispatch(productPageElement(item.id))}}
             >
               {item.title}
             </Link>
             <div className="flex  flex-row gap-[15px] justify-around items-center text-[14px]">
-              <p className={`text-[#b5aec4} ${item.discountPercentage? "line-through":''} `}>${item.price}</p>
+              <p className={`text-[#b5aec4] max-sm:text-[10px] ${item.discountPercentage? "line-through":''} `}>${item.price}</p>
               {item.discountPercentage && (
-                      <span className="text-red-600">${(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}</span>)}
+                      <span className="text-red-600 max-sm:text-[11px]">${(item.price * (1 - item.discountPercentage / 100)).toFixed(2)}</span>)}
               
             </div>
           </div>
 
-          <button onClick={()=>dispatch(add({...item,count:1}))} className="text-white gap-0 bg-white max-lg:bg-red-500 mt-[20px] h-[40px] group-hover:bg-red-500 flex items-center justify-center hover:bg-red-400 transition duration-200 ease-linear w-full text-[12px] font-semibold">
+          <button onClick={()=>dispatch(add({...item,count:1}))} className="text-white gap-0 bg-white max-lg:bg-red-500 mt-[20px] h-[40px] max-sm:h-[25px] max-sm:text-[10px] group-hover:bg-red-500 flex items-center justify-center hover:bg-red-400 transition duration-200 ease-linear w-full text-[12px] font-semibold">
             ADD TO CARD
           </button>
         </div>

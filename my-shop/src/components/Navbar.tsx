@@ -56,7 +56,7 @@ const Navbar = () => {
       <nav className=" flex relative w-[80%] justify-between items-center ">
         <div>
           <NavLink to="/">
-            <h1 className="font-bold text-3xl cursor-pointer text-black">
+            <h1 className="font-bold text-3xl max-sm:text-xl cursor-pointer text-black">
               My<span className="text-red-600">Shop</span>
             </h1>
           </NavLink>
@@ -87,11 +87,11 @@ const Navbar = () => {
             Contact
           </NavLink>
         </nav>
-        <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center   ">
-          <div className="flex cursor-pointer items-center">
+        <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center max-sm:text-[10px]  ">
+          <div className="flex cursor-pointer items-center ">
             <Search
               onClick={() => setIsVisible(!isVisible)}
-              className="w-5 h-5 hover:text-gray-500 "
+              className="w-5 h-5 max-sm:size-3 hover:text-gray-500 "
             />
             <Link to="search" smooth={true} duration={500}>
               <input
@@ -122,22 +122,22 @@ const Navbar = () => {
           </div>
           <div
             onClick={() => toggleBasket()}
-            className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] bg-gray-300"
+            className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] max-sm:w-[25px] max-sm:h-[25px] bg-gray-300"
           >
             <FaShoppingCart className="hover:text-gray-500 " />
             {basketData.length !== 0 && (
-              <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 text-[15px] text-white items-center justify-center w-4">
+              <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 max-sm:h-2  max-sm:w-2  max-sm:text-[10px] text-[15px] text-white items-center justify-center w-4">
                 {basketData.length}
               </span>
             )}
           </div>
           {basketMenu && <Basket setBasketMenu={setBasketMenu} />}
 
-          <div className="md:hidden cursor-pointer flex">
+          <div className="md:hidden cursor-pointer flex ">
             {menu ? (
-              <AiOutlineClose size={25} onClick={handleChange} />
+              <AiOutlineClose className="max-sm:text-[14px] sm:text-[25px]" onClick={handleChange} />
             ) : (
-              <AiOutlineMenuFold onClick={handleChange} size={25} />
+              <AiOutlineMenuFold onClick={handleChange} className="max-sm:text-[14px]" />
             )}
           </div>
         </div>
