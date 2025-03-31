@@ -24,7 +24,7 @@ export interface Product {
   shippingInformation:string
   warrantyInformation:string
   returnPolicy:string
-  rewiews:Review[]
+  reviews:Review[]
 }
 
 export interface CardState {
@@ -148,8 +148,6 @@ export const FetchSlice = createSlice({
       state.isLoading = false;
       state.data = action.payload;
       state.category = Array.from(new Set(action.payload.map(item=>item.category.toUpperCase())))
-      
-      
     });
     builder.addCase(fetchData.rejected, (state) => {
       state.isLoading = false;

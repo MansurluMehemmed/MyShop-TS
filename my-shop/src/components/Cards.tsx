@@ -11,7 +11,6 @@ const Cards = () => {
   let {  data,isLoading, error,showMore,seachQuery,favoriteProducts } = useSelector(
     (state: RootState) => state.fetch
   );
-  console.log(favoriteProducts);
   const selectedCategory = useSelector(
     (state: RootState) => state.fetch.selectedCategory
   );
