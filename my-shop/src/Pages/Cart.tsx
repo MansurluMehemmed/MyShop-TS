@@ -15,7 +15,7 @@ const Payment = () => {
     total = Number((total + productTotal).toFixed(2));
   });
   return (
-    <div className="w-full flex flex-col items-center  bg-[#ebebeb] h-screen absolute ">
+    <div className="w-full flex flex-col items-center  bg-[#ebebeb] h-full absolute ">
        
         <div className="flex flex-col  relative w-[80%] mt-[140px] gap-10 min-h-[20%] bg-white justify-between">
         <button

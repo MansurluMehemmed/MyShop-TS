@@ -14,6 +14,8 @@ const OrderShare = () => {
     "Pickup from delivery points"
   );
   const { basketData, orders } = useSelector((state: RootState) => state.fetch);
+  console.log(orders);
+  
   const handleOrderedFunc = () => {
     dispatch(
       ordered({
@@ -30,7 +32,7 @@ const OrderShare = () => {
       navigate(-2);
 
       setIsModalOpen(false);
-    }, 2000);
+    }, 1400);
   };
 
   return (
@@ -107,8 +109,8 @@ const OrderShare = () => {
                 name=""
                 id=""
               >
-                <option value="">Pickup from delivery points</option>
-                <option value="">Delivery to the address</option>
+                <option value="Pickup from delivery points">Pickup from delivery points</option>
+                <option value="Delivery to the address">Delivery to the address</option>
               </select>
             </div>
           </section>

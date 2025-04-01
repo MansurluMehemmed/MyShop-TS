@@ -7,6 +7,8 @@ import { add, addFavorite, fetchData, productPageElement } from "../State/FetchS
 
 const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const [but,setBut] = useState(false)
   let {  data,isLoading, error,showMore,seachQuery,favoriteProducts } = useSelector(
     (state: RootState) => state.fetch
@@ -67,8 +69,13 @@ const Cards = () => {
             </div>
           </div>
 
-          <button onClick={()=>dispatch(add({...item,count:1}))} className="text-white gap-0 bg-white max-lg:bg-red-500 mt-[20px] h-[40px] max-sm:h-[25px] max-sm:text-[10px] group-hover:bg-red-500 flex items-center justify-center hover:bg-red-400 transition duration-200 ease-linear w-full text-[12px] font-semibold">
-            ADD TO CARD
+          <button onClick={()=>{dispatch(add({...item,count:1}))
+            setIsModalOpen(true)
+            setTimeout(() => {
+              setIsModalOpen(false)
+            }, 800);
+        }} className={`text-white gap-0 bg-white ${isModalOpen?'group-hover:bg-green-600':'group-hover:bg-red-500'}  max-lg:bg-red-500 mt-[20px] h-[40px] max-sm:h-[25px] max-sm:text-[10px]  flex items-center justify-center  transition duration-200 ease-linear w-full text-[12px] font-semibold`}>
+          {isModalOpen?'ADDED ':'ADD TO CART'}
           </button>
         </div>
       ))}
