@@ -29,9 +29,8 @@ export interface Product {
 }
 
 interface Orders extends Product {
-  orderNumber:number
   deliveryMethod:string
-  date:string
+  date:string | number
   paymentMethod:string
   
 }
@@ -152,11 +151,7 @@ export const FetchSlice = createSlice({
       }
     },
     ordered:(state,action)=>{
-      let i = 0;
-      state.orders[i].orderNumber ++
       state.orders = [action.payload,...state.orders]
-      console.log(state.orders);
-      
     }
   },
  

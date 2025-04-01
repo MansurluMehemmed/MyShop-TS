@@ -2,17 +2,46 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteAll, ordered } from "../State/FetchSlice";
+import { useState } from "react";
 
 const OrderShare = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
-  const { basketData } = useSelector((state: RootState) => state.fetch);
-  const handleOrderedFunc= ()=>{
+  const [paymentMethod, setPaymentMethod] = useState("Cash");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const [deliveryMethod, setDeliveryMethod] = useState(
+    "Pickup from delivery points"
+  );
+  const { basketData, orders } = useSelector((state: RootState) => state.fetch);
+  const handleOrderedFunc = () => {
+    dispatch(
+      ordered({
+        ...basketData.map((product) => product),
+        paymentMethod: paymentMethod,
+        deliveryMethod: deliveryMethod,
+        date: new Date().toLocaleString(),
+      })
+    );
     
-  }
+    dispatch(deleteAll());
+    setIsModalOpen(true);
+    setTimeout(() => {
+      navigate(-2);
+
+      setIsModalOpen(false);
+    }, 2000);
+  };
+
   return (
-    <div className="w-full flex justify-center py-[50px]">
+    <div className="w-full flex justify-center py-[50px] relative">
       <div className="flex flex-col w-[80%]  mt-[100px] bg-white  shadow">
+        <button
+          onClick={() => navigate(-1)}
+          className=" flex fixed z-30 max-md:left-3  left-20 justify-self-start self-start px-5 py-2 bg-red-600 text-white rounded cursor-pointer"
+        >
+          Back
+        </button>
         <div className="flex w-full">
           <ul className="flex flex-col gap-10  w-full p-0 m-0">
             {basketData.map((product) => (
@@ -55,11 +84,33 @@ const OrderShare = () => {
           </ul>
         </div>
         <div className="flex flex-row w-full ">
-          <section className="flex ">
-            <select name="" id="">
-              <option value="cash">cash</option>
-              <option value="card">card</option>
-            </select>
+          <section className="flex w-full py-10 px-5 justify-between text-xl">
+            <div className="flex gap-[10px] items-center justify-center">
+              <p>Payment method:</p>
+              <select
+                value={paymentMethod}
+                onChange={(e) => setPaymentMethod(e.target.value)}
+                className="bg-gray-200 rounded p-[5px]"
+                name=""
+                id=""
+              >
+                <option value="Cash">Cash</option>
+                <option value="Card">Card</option>
+              </select>
+            </div>
+            <div className="flex items-center justify-center gap-[10px]">
+              <p>Delivery method: </p>
+              <select
+                value={deliveryMethod}
+                onChange={(e) => setDeliveryMethod(e.target.value)}
+                className="bg-gray-200 rounded p-[5px]"
+                name=""
+                id=""
+              >
+                <option value="">Pickup from delivery points</option>
+                <option value="">Delivery to the address</option>
+              </select>
+            </div>
           </section>
         </div>
 
@@ -69,9 +120,9 @@ const OrderShare = () => {
         >
           <button
             onClick={() => handleOrderedFunc()}
-            className="w-full bg-[#7c62e3] transition duration-300 hover:bg-[#9783e8] text-white  py-[10px] "
+            className={`w-full ${isModalOpen ? "bg-green-500" : "bg-[#7c62e3]"} transition duration-300 hover:bg-[#9783e8] text-white  py-[10px] `}
           >
-            Order it
+            {isModalOpen ? "Ordered" : "Order it"}
           </button>
         </Link>
       </div>

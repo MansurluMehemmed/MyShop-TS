@@ -42,7 +42,7 @@ const Basket: React.FC<ChildProps> = ({ setBasketMenu }) => {
                 onClick={() => setBasketMenu(false)}
                 className="bg-[#7c62e3] rounded p-[6px] transition duration-500 text-white hover:bg-[#a791ff] "
               >
-                Ordered
+                Go to cart
               </button>
             </Link>
           </div>
