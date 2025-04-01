@@ -69,10 +69,10 @@ const Navbar = () => {
             Home
           </NavLink>
           <NavLink
-            to="shop"
+            to="/orders"
             className="hover:text-gray-400 cursor-pointer transition duration-300 ease-in-out "
           >
-            Shop
+            Orders
           </NavLink>
           <NavLink
             to="blog"

@@ -38,6 +38,8 @@ export interface CardState {
   basketData:Product[]
   productPageData:Product[]
   favoriteProducts:Product[]
+  orders:Product[]
+  filteredProduct:Product[]
 }
 
 const initialState: CardState = {
@@ -50,7 +52,9 @@ const initialState: CardState = {
   seachQuery:'',
   basketData:[],
   productPageData:[],
-  favoriteProducts:[]
+  favoriteProducts:[],
+  orders:[],
+  filteredProduct:[]
 };
 
 
@@ -137,6 +141,11 @@ export const FetchSlice = createSlice({
       }else{
         state.favoriteProducts = [...state.favoriteProducts.filter(product=>product.id !== action.payload.id)]
       }
+    },
+    ordered:(state,action)=>{
+      state.orders = [action.payload,...state.orders]
+      console.log(state.orders);
+      
     }
   },
  
@@ -155,5 +164,5 @@ export const FetchSlice = createSlice({
     });
   },
 });
-export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease,deleteAll,deleteProducts,productPageElement,addFavorite} = FetchSlice.actions
+export const  {selectedCategories,showMoreClick,setSearchQuery,add,decrease,deleteAll,deleteProducts,productPageElement,addFavorite,ordered} = FetchSlice.actions
 export default FetchSlice.reducer;
