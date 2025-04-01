@@ -7,6 +7,7 @@ interface Review {
   reviewerName: string;  
   reviewerEmail: string;  
 }
+
 // API-dən gələn məlumatın strukturunu müəyyən edən interfeys
 export interface Product {
   id: number;
@@ -27,6 +28,14 @@ export interface Product {
   reviews:Review[]
 }
 
+interface Orders extends Product {
+  orderNumber:number
+  deliveryMethod:string
+  date:string
+  paymentMethod:string
+  
+}
+
 export interface CardState {
   data: Product[];
   category:string[]
@@ -38,7 +47,7 @@ export interface CardState {
   basketData:Product[]
   productPageData:Product[]
   favoriteProducts:Product[]
-  orders:Product[]
+  orders:Orders[]
   filteredProduct:Product[]
 }
 
@@ -143,6 +152,8 @@ export const FetchSlice = createSlice({
       }
     },
     ordered:(state,action)=>{
+      let i = 0;
+      state.orders[i].orderNumber ++
       state.orders = [action.payload,...state.orders]
       console.log(state.orders);
       
