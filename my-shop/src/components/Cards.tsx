@@ -9,7 +9,6 @@ const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const [but,setBut] = useState(false)
   let {  data,isLoading, error,showMore,seachQuery,favoriteProducts } = useSelector(
     (state: RootState) => state.fetch
   );

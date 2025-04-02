@@ -13,19 +13,29 @@ const OrderShare = () => {
   const [deliveryMethod, setDeliveryMethod] = useState(
     "Pickup from delivery points"
   );
-  const { basketData, orders } = useSelector((state: RootState) => state.fetch);
-  console.log(orders);
-  
+  const { basketData } = useSelector((state: RootState) => state.fetch);
+  let total= 0;
+  basketData.forEach((item) => {
+    let productTotal = item.count * (item.discountPercentage
+      ? Number((
+          item.price *
+          (1 - item.discountPercentage / 100)
+        ).toFixed(2))
+      : item.price);
+    total = Number((total + productTotal).toFixed(2));
+  });
   const handleOrderedFunc = () => {
-    dispatch(
-      ordered({
-        ...basketData.map((product) => product),
+      const orderPayload = {
+        product:basketData.map(product=>product),
         paymentMethod: paymentMethod,
         deliveryMethod: deliveryMethod,
         date: new Date().toLocaleString(),
-      })
-    );
+        totalPrice:total
+      }
+      dispatch(ordered(orderPayload))
     
+   
+
     dispatch(deleteAll());
     setIsModalOpen(true);
     setTimeout(() => {
@@ -109,8 +119,12 @@ const OrderShare = () => {
                 name=""
                 id=""
               >
-                <option value="Pickup from delivery points">Pickup from delivery points</option>
-                <option value="Delivery to the address">Delivery to the address</option>
+                <option value="Pickup from delivery points">
+                  Pickup from delivery points
+                </option>
+                <option value="Delivery to the address">
+                  Delivery to the address
+                </option>
               </select>
             </div>
           </section>

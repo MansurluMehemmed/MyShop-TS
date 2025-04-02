@@ -16,7 +16,12 @@ const Basket: React.FC<ChildProps> = ({ setBasketMenu }) => {
   const { basketData } = useSelector((state: RootState) => state.fetch);
   let total: number = 0;
   basketData.forEach((item) => {
-    let productTotal = item.count * item.price;
+    let productTotal = item.count * (item.discountPercentage
+      ? Number((
+          item.price *
+          (1 - item.discountPercentage / 100)
+        ).toFixed(2))
+      : item.price);;
     total = Number((total + productTotal).toFixed(2));
   });
   
