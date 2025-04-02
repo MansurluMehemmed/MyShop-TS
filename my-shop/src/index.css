@@ -10,3 +10,12 @@ button{cursor: pointer;}
   background-color: rgb(255, 70, 70);
   color: white;
 }
+@layer components {
+  .order-details p {
+    @apply text-[#9497ad] text-[14px];
+  }
+
+  .order-details span {
+    @apply text-[#1e244d] text-[14px];
+  }
+}

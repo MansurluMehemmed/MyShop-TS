@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppDispatch, RootState } from "../State/store";
-import { productPageElement } from "../State/FetchSlice";
+import { moreInfoOrder, productPageElement } from "../State/FetchSlice";
 
 const Orders = () => {
     const dispatch = useDispatch<AppDispatch>()
@@ -33,7 +33,7 @@ const Orders = () => {
                 ))}
               </div>
               <div className="flex justify-between ">
-                <Link className="text-[#7c62e3]" to={`/orders/${order.id}`}>
+                <Link className="text-[#7c62e3]" onClick={()=>dispatch(moreInfoOrder(order.id))} to={`/orders/${order.id}`}>
                   More about the order
                 </Link>
                 <p>
