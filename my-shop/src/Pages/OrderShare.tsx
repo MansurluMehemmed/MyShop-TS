@@ -30,7 +30,8 @@ const OrderShare = () => {
         paymentMethod: paymentMethod,
         deliveryMethod: deliveryMethod,
         date: new Date().toLocaleString(),
-        totalPrice:total
+        totalPrice:total,
+        id:Date.now()
       }
       dispatch(ordered(orderPayload))
     

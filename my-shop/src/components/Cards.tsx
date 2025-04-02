@@ -49,7 +49,7 @@ const Cards = () => {
               className="w-full h-auto "
             />
           </div>
-          <div onClick={()=>dispatch(addFavorite({...item}))}  className="absolute z-10 top-[15px] left-[15px] ">
+          <div onClick={()=>dispatch(addFavorite({...item}))}  className="absolute  z-10 top-[15px] left-[15px] ">
             <FavoriButton/>
           </div>
           <div className="flex flex-col px-[10px] items-center justify-center">

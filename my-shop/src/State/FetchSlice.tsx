@@ -29,6 +29,7 @@ export interface Product {
 }
 
 interface Orders {
+  id:string|number
   product:Product[]
   deliveryMethod: string;
   date: string | number;

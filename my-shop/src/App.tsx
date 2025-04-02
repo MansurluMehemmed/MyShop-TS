@@ -7,6 +7,7 @@ import ProductsPage from "./Pages/ProductsPage";
 import FavoriProducts from "./Pages/FavoriProducts";
 import OrderShare from "./Pages/OrderShare";
 import Orders from "./Pages/Orders";
+import MoreInfoOrders from "./Pages/MoreInfoOrders";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/favorites" element={<FavoriProducts />} />
         <Route path="/delivery" element={<OrderShare />} />
         <Route path="/orders" element={<Orders />} />
+        <Route path="/orders/:id" element={<MoreInfoOrders />} />
       </Routes>
     </>
   );

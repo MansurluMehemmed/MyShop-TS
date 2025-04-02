@@ -15,8 +15,8 @@ const FavoriButton = () => {
       setActive(!active)
      
     }} className="like relative">
-        <FaRegHeart className={`absolute ${active?"text-red-600":''}`}/>
-        <AiFillHeart className={`text-red-600 ${active?'flex':'hidden'}  `}/>
+        <FaRegHeart className={`absolute ${active?"text-red-600":''} max-sm:text-[12px]`}/>
+        <AiFillHeart className={`text-red-600 ${active?'flex':'hidden'} max-sm:text-[12px] `}/>
        </div>
     </div>
   )
