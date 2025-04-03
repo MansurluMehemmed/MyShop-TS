@@ -16,7 +16,7 @@ const Orders = () => {
           {orders.map((order) => (
             <li key={order.id} className="flex flex-col w-full p-5">
               <div className="flex justify-between w-full border-b py-5">
-                <span className="text-xl ">Order № #{order.id}</span>
+                <span className="text-xl ">Order № {order.id}</span>
                 <div className="flex flex-row gap-5">
                   <p className="text-[15px]">Date of order : {order.date}</p>
                   <p className="text-green-400 px-[5px] bg-gray-200">

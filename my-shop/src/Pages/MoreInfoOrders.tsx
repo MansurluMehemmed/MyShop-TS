@@ -10,9 +10,8 @@ const MoreInfoOrders = () => {
   return (
     <div className="flex w-full bg-gray-100 justify-center h-full">
       <div className="flex w-[80%] xs:bg-red-500 bg-white flex-col h-full mt-[100px]">
-        <p onClick={() => navigate(-1)} className="cursor-pointer">
-          {" "}
-          My Orders
+        <p onClick={() => navigate(-1)} className="cursor-pointer px-10 text-gray-700">
+          {"<"} My Orders
         </p>
 
         {MoreInfoOrders.map((order) => (
@@ -22,7 +21,7 @@ const MoreInfoOrders = () => {
                 to="/orders"
                 className="text-[28px] border-b font-semibold mb-20"
               >
-                Order № {order.id}{" "}
+                Order № {order.id}
               </Link>
               <div className="flex flex-col w-[70%] self-center">
                 <h2 className="font-semibold text-xl mb-5">
@@ -88,6 +87,21 @@ const MoreInfoOrders = () => {
                     </div>
                   ))}
                 </div>
+                <div className="flex flex-col w-full gap-[10px] p-[10px] mb-20">
+                  <div className="flex justify-between">
+                      <p className="text-[13px] text-[#50557a]">Order amount ({order.product.length} product):</p>
+                      <p className="text-[16px]">${order.totalPrice}</p>
+                  </div>
+                  <div className="flex justify-between ">
+                      <p className="text-[13px] text-[#50557a]">Delivery:</p>
+                      <p className="text-[#16c67a] text-[16px]">for free</p>
+                  </div>
+                  <div className="flex justify-between mt-[10px] border-t py-5">
+                    <strong>Total payment:</strong>
+                    <strong >${order.totalPrice}</strong>
+                  </div>
+                </div>
+
               </div>
             </div>
           </div>

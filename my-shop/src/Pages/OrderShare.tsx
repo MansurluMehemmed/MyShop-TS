@@ -43,7 +43,7 @@ const OrderShare = () => {
       navigate(-2);
 
       setIsModalOpen(false);
-    }, 1400);
+    }, 1000);
   };
 
   return (
