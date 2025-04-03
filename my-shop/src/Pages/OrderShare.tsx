@@ -3,12 +3,12 @@ import { AppDispatch, RootState } from "../State/store";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteAll, ordered } from "../State/FetchSlice";
 import { useState } from "react";
-
 const OrderShare = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
   const [paymentMethod, setPaymentMethod] = useState("Cash");
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showDialog, setShowDialog] = useState(false);
 
   const [deliveryMethod, setDeliveryMethod] = useState(
     "Pickup from delivery points"
@@ -136,10 +136,12 @@ const OrderShare = () => {
           className="flex flex-row w-full justify-center items-center"
         >
           <button
-            onClick={() => handleOrderedFunc()}
+            onClick={() => {handleOrderedFunc()
+              setShowDialog(true)
+            }}
             className={`w-full ${isModalOpen ? "bg-green-500" : "bg-[#7c62e3]"} transition duration-300 hover:bg-[#9783e8] text-white  py-[10px] `}
           >
-            {isModalOpen ? "Ordered" : "Order it"}
+            {isModalOpen ? "Ordered" : "Order it"} 
           </button>
         </Link>
       </div>
