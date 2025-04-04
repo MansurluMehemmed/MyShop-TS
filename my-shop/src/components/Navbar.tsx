@@ -21,7 +21,9 @@ const Navbar = () => {
   const [basketMenu, setBasketMenu] = useState(false);
   const [menu, setMenu] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const { basketData } = useSelector((state: RootState) => state.fetch);
+  const { basketData, favoriteProducts } = useSelector(
+    (state: RootState) => state.fetch
+  );
   const basketRef = useRef<HTMLDivElement>(null);
   const handleChange = () => {
     setMenu(!menu);
@@ -32,7 +34,7 @@ const Navbar = () => {
   const toggleBasket = () => {
     setBasketMenu(!basketMenu);
   };
- 
+
   // function handleOutsideClickFunction(params: type) {
   //   setBasketMenu(false);
   // }
@@ -97,9 +99,14 @@ const Navbar = () => {
 
             <NavLink
               to="/favorites"
-              className="cursor-pointer hover:text-gray-500"
+              className="cursor-pointer hover:text-gray-500 relative"
             >
-              <FaRegHeart />
+              <FaRegHeart size={19} />
+              {favoriteProducts.length !== 0 && (
+                <span className="bg-red-600 rounded-full absolute bottom-[10px] left-[10px]  flex  max-sm:h-2  max-sm:w-2  max-sm:text-[10px] text-[14px] text-white items-center justify-center w-[16px] h-[16px]">
+                  {favoriteProducts.length}
+                </span>
+              )}
             </NavLink>
 
             <div className="flex  cursor-pointer">
@@ -115,22 +122,25 @@ const Navbar = () => {
                 </p>
               </div>
             </div>
-            <OutsideClickAlert onOutsideClick={handleOutsideClick} basketRef={basketRef}>
+            <OutsideClickAlert
+              onOutsideClick={handleOutsideClick}
+              basketRef={basketRef}
+            >
               <div
                 onClick={() => toggleBasket()}
                 className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] max-sm:w-[25px] max-sm:h-[25px] bg-gray-300"
-                
               >
                 <FaShoppingCart className="hover:text-gray-500 " />
-                {basketData.length !==0 && (
+                {basketData.length !== 0 && (
                   <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 max-sm:h-2  max-sm:w-2  max-sm:text-[10px] text-[15px] text-white items-center justify-center w-4">
                     {basketData.length}
                   </span>
                 )}
-                {basketMenu && <Basket setBasketMenu={setBasketMenu} ref={basketRef}/>}
+                {basketMenu && (
+                  <Basket setBasketMenu={setBasketMenu} ref={basketRef} />
+                )}
               </div>
             </OutsideClickAlert>
-            
 
             <div className="md:hidden cursor-pointer flex ">
               {menu ? (
