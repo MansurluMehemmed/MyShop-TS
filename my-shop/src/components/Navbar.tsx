@@ -32,8 +32,7 @@ const Navbar = () => {
   const toggleBasket = () => {
     setBasketMenu(!basketMenu);
   };
-  
-  const cartsLength = JSON.parse(localStorage.getItem("cart")).length;
+ 
   // function handleOutsideClickFunction(params: type) {
   //   setBasketMenu(false);
   // }
@@ -123,9 +122,9 @@ const Navbar = () => {
                 
               >
                 <FaShoppingCart className="hover:text-gray-500 " />
-                {cartsLength && (
+                {basketData.length !==0 && (
                   <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 max-sm:h-2  max-sm:w-2  max-sm:text-[10px] text-[15px] text-white items-center justify-center w-4">
-                    {cartsLength}
+                    {basketData.length}
                   </span>
                 )}
                 {basketMenu && <Basket setBasketMenu={setBasketMenu} ref={basketRef}/>}

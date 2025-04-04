@@ -53,6 +53,8 @@ export interface CardState {
   filteredProduct: Product[];
 }
 
+const persistedBasketData = localStorage.getItem('basketData')
+
 const initialState: CardState = {
   data: [],
   category: [],
@@ -61,7 +63,7 @@ const initialState: CardState = {
   selectedCategory: "ALL",
   showMore: 10,
   seachQuery: "",
-  basketData: [],
+  basketData: persistedBasketData? JSON.parse(persistedBasketData): [],
   productPageData: [],
   favoriteProducts: [],
   orders: [],
@@ -121,10 +123,9 @@ export const FetchSlice = createSlice({
       } else {
         state.basketData = [action.payload, ...state.basketData];
       }
-      console.log(state.basketData);
 
-      const cart = [action.payload, ...state.basketData];
-      localStorage.setItem("cart", JSON.stringify(cart));
+      const basketData = [action.payload, ...state.basketData];
+      localStorage.setItem("basketData", JSON.stringify(basketData));
     },
     decrease: (state, action) => {
       let i = 0;
@@ -139,14 +140,18 @@ export const FetchSlice = createSlice({
       } else {
         state.basketData = [action.payload, ...state.basketData];
       }
+      localStorage.setItem('basketData',JSON.stringify(state.basketData))
     },
     deleteProducts: (state, action) => {
       state.basketData = state.basketData.filter(
         (product) => product.id !== action.payload
       );
+      localStorage.setItem('basketData',JSON.stringify(state.basketData))
     },
     deleteAll: (state) => {
       state.basketData = [];
+      localStorage.setItem('basketData',JSON.stringify(state.basketData))
+
     },
     productPageElement: (state, action) => {
       state.productPageData = state.data.filter(
