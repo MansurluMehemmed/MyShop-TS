@@ -3,6 +3,13 @@
   "references": [
     { "path": "./tsconfig.app.json" },
     { "path": "./tsconfig.node.json" }
-  ]
+  ],
+  "compilerOptions": {
+    "jsx": "react-jsx", // React 17+ istifadə edirsinizsə
+    "strict": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true
+  }
   
 }
+

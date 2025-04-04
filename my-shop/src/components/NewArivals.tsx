@@ -24,7 +24,7 @@ const NewArivals = () => {
    }
     
   return (
-    <div className="flex flex-col items-center justify-center " >
+    <div className="flex flex-col items-center justify-center relative " >
         <h1 id="search"  className="text-[40px] max-sm:text-[24px] font-semibold flex items-center justify-center">New Arrivals</h1>
         <div  className="flex flex-row items-center justify-center w-auto mt-10 max-sm:mt-5">
             <ul className="flex flex-row decoration-0 flex-wrap  text-2xl p-0 m-0 items-center justify-center">
@@ -40,7 +40,7 @@ const NewArivals = () => {
 
         </div>
         <div  className='w-[80%] flex flex-row flex-wrap  h-auto mt-10'>
-          <div className='grid grid-cols-1  max-sm:grid-cols-2 gap-0 max-lg:gap-[10px] sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5   px-0 md:px-10 '>
+          <div className='grid grid-cols-1  max-sm:grid-cols-2 gap-0 max-lg:gap-[10px] relative sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5   px-0 md:px-10 '>
             <Cards/>
           </div>
         </div>

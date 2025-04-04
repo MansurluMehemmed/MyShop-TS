@@ -29,8 +29,8 @@ export interface Product {
 }
 
 interface Orders {
-  id:string|number
-  product:Product[]
+  id: string | number;
+  product: Product[];
   deliveryMethod: string;
   date: string | number;
   paymentMethod: string;
@@ -49,7 +49,7 @@ export interface CardState {
   productPageData: Product[];
   favoriteProducts: Product[];
   orders: Orders[];
-  MoreInfoOrders:Orders[]
+  MoreInfoOrders: Orders[];
   filteredProduct: Product[];
 }
 
@@ -65,7 +65,7 @@ const initialState: CardState = {
   productPageData: [],
   favoriteProducts: [],
   orders: [],
-  MoreInfoOrders:[],
+  MoreInfoOrders: [],
   filteredProduct: [],
 };
 
@@ -121,6 +121,10 @@ export const FetchSlice = createSlice({
       } else {
         state.basketData = [action.payload, ...state.basketData];
       }
+      console.log(state.basketData);
+
+      const cart = [action.payload, ...state.basketData];
+      localStorage.setItem("cart", JSON.stringify(cart));
     },
     decrease: (state, action) => {
       let i = 0;
@@ -165,9 +169,11 @@ export const FetchSlice = createSlice({
     ordered: (state, action) => {
       state.orders = [action.payload, ...state.orders];
     },
-    moreInfoOrder:(state,action)=>{
-      state.MoreInfoOrders = state.orders.filter(order=>order.id===action.payload)
-    }
+    moreInfoOrder: (state, action) => {
+      state.MoreInfoOrders = state.orders.filter(
+        (order) => order.id === action.payload
+      );
+    },
   },
 
   extraReducers: (builder) => {
@@ -198,6 +204,6 @@ export const {
   productPageElement,
   addFavorite,
   ordered,
-  moreInfoOrder
+  moreInfoOrder,
 } = FetchSlice.actions;
 export default FetchSlice.reducer;

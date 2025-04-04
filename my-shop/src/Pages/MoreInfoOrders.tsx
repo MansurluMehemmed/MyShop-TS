@@ -7,6 +7,8 @@ const MoreInfoOrders = () => {
   const { MoreInfoOrders } = useSelector((state: RootState) => state.fetch);
   const dispatch = useDispatch<AppDispatch>();
   const navigate = useNavigate();
+
+
   return (
     <div className="flex w-full bg-gray-100 justify-center h-full">
       <div className="flex w-[80%] xs:bg-red-500 bg-white flex-col h-full mt-[100px]">
