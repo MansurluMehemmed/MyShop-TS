@@ -56,6 +56,8 @@ export interface CardState {
 const persistedBasketData = localStorage.getItem('basketData')
 const persistedProductPageData = localStorage.getItem('productPageData')
 const persistedFavoriteProducts = localStorage.getItem('favoriteProducts')
+const persistedOrders = localStorage.getItem('orders')
+const persistedMoreInfoOrders = localStorage.getItem('moreInfoOrders')
 
 
 
@@ -70,8 +72,8 @@ const initialState: CardState = {
   basketData: persistedBasketData? JSON.parse(persistedBasketData): [],
   productPageData:persistedProductPageData?JSON.parse(persistedProductPageData): [],
   favoriteProducts:persistedFavoriteProducts?JSON.parse(persistedFavoriteProducts): [],
-  orders: [],
-  MoreInfoOrders: [],
+  orders:persistedOrders?JSON.parse(persistedOrders): [],
+  MoreInfoOrders:persistedMoreInfoOrders?JSON.parse(persistedMoreInfoOrders): [],
   filteredProduct: [],
 };
 
@@ -178,11 +180,15 @@ export const FetchSlice = createSlice({
     },
     ordered: (state, action) => {
       state.orders = [action.payload, ...state.orders];
+      localStorage.setItem('orders',JSON.stringify(state.orders))
+
     },
     moreInfoOrder: (state, action) => {
       state.MoreInfoOrders = state.orders.filter(
         (order) => order.id === action.payload
       );
+      localStorage.setItem('moreInfoOrders',JSON.stringify(state.MoreInfoOrders))
+
     },
   },
 
