@@ -7,16 +7,16 @@ import { AppDispatch, RootState } from "../State/store";
 import { add } from "../State/FetchSlice";
 import Rating from "../layouts/Rating/Rating";
 import { MessageCircle } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const ProductsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
   const [rewiewDisplay, setRewiewDisplay] = useState(false);
   const navigate = useNavigate();
   const { productPageData } = useSelector((state: RootState) => state.fetch);
-  //    useEffect(()=>{
-
-  //    },[])
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
 
   return (
     <div className="w-full flex justify-center items-center  ">
