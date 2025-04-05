@@ -1,6 +1,4 @@
-import { Swiper, SwiperSlide } from "swiper/react";
-import "swiper/css";
-import { Autoplay } from "swiper/modules";
+
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
@@ -8,6 +6,7 @@ import { add } from "../State/FetchSlice";
 import Rating from "../layouts/Rating/Rating";
 import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
+import ImageSlider from "../layouts/ImageSlider";
 
 const ProductsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -34,29 +33,10 @@ const ProductsPage = () => {
                 key={product.id}
                 className="flex w-full mx-[10px] md:w-[50%] md:mx-0 h-screen"
               >
-                <Swiper
-                  key={product.id}
-                  className="mb-10"
-                  spaceBetween={50}
-                  pagination={{
-                    dynamicBullets: true,
-                  }}
-                  modules={[Autoplay]}
-                  autoplay={{ delay: 3000, disableOnInteraction: false }}
-                  loop={true}
-                >
-                  {product.images.map((image, index) => (
-                    <SwiperSlide key={index} className=" w-full  h-screen ">
-                      <div className=" w-full  flex h-screen justify-center items-center">
-                        <img
-                          className="w-full h-full "
-                          src={image}
-                          alt={product.title}
-                        />
-                      </div>
-                    </SwiperSlide>
-                  ))}
-                </Swiper>
+               
+
+<ImageSlider images={product.images} interval={4000}/>
+               
               </div>
               <div className="flex w-full md:w-[50%] flex-col ">
                 <h2 className="font-semibold text-2xl mb-[10px]">
@@ -68,7 +48,7 @@ const ProductsPage = () => {
                 <div className="flex flex-row  mb-10 gap-5">
                   <p>Total Rating: {product.rating}</p>
                   <Link
-                    to="reviews"
+                    to="/reviews"
                     className="flex cursor-pointer "
                     onClick={() => setRewiewDisplay(!rewiewDisplay)}
                   >
@@ -111,7 +91,7 @@ const ProductsPage = () => {
               </div>
             </div>
             <div className="flex mt-10 w-full">
-              <div id="reviews" className={`flex flex-col w-full gap-5 `}>
+              <div id="/reviews" className={`flex flex-col w-full gap-5 `}>
                 <h2 className="text-2xl">Product reviews and ratings:</h2>
                 <ul className="w-full flex flex-col p-0 m-0 shadow gap-2">
                   {product.reviews.map((review) => (

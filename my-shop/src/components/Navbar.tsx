@@ -11,19 +11,25 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-scroll";
 import { AppDispatch, RootState } from "../State/store";
-import { setSearchQuery } from "../State/FetchSlice";
+import { searchProducts, setSearchQuery } from "../State/FetchSlice";
 import Basket from "./Basket";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import OutsideClickAlert from "../hooks/OutsideClickAlert";
 // import useOutsideClickAlert from "../hooks/useOutsideClickAlert";
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const navigate = useNavigate()
   const [basketMenu, setBasketMenu] = useState(false);
   const [menu, setMenu] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const { basketData, favoriteProducts } = useSelector(
+  let { seachQuery } = useSelector(
     (state: RootState) => state.fetch
   );
+  const { basketData, favoriteProducts,filteredProduct } = useSelector(
+    (state: RootState) => state.fetch
+  );
+  console.log(filteredProduct);
+
   const basketRef = useRef<HTMLDivElement>(null);
   const handleChange = () => {
     setMenu(!menu);
@@ -84,17 +90,18 @@ const Navbar = () => {
           <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center max-sm:text-[10px]  ">
             <div className="flex cursor-pointer items-center ">
               <Search
-                onClick={() => setIsVisible(!isVisible)}
+                onClick={() => {setIsVisible(!isVisible)
+                  dispatch(searchProducts(seachQuery))
+                  isVisible&&navigate('/filteredProducts')
+                }}
                 className="w-5 h-5 max-sm:size-3 hover:text-gray-500 "
               />
-              <Link to="search" smooth={true} duration={500}>
                 <input
                   onChange={(e) => dispatch(setSearchQuery(e.target.value))}
                   type="text"
                   placeholder="Search..."
                   className={`ml-2 ${isVisible ? "flex" : "hidden"} outline-none`}
                 />
-              </Link>
             </div>
 
             <NavLink

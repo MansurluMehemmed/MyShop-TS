@@ -2,12 +2,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { AppDispatch, RootState } from "../State/store";
 import { moreInfoOrder, productPageElement } from "../State/FetchSlice";
+import { useEffect } from "react";
 
 const Orders = () => {
     const dispatch = useDispatch<AppDispatch>()
   const { orders } = useSelector((state: RootState) => state.fetch);
-  console.log(orders);
-
+  useEffect(() => {
+      window.scrollTo(0, 0);
+    }, []);
   return (
     <div className="flex w-full h-full justify-center">
       <div className="flex flex-col w-[80%] mt-[100px]">

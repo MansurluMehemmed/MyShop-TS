@@ -82,9 +82,17 @@ export const fetchData = createAsyncThunk<Product[], number>(
   "fetchSlice",
   async (limit) => {
     // ✅ Burada limit arqument kimi gəlir
+    let url=`https://dummyjson.com/products` ;
     try {
+      if(limit){
+        url = `https://dummyjson.com/products?limit=${limit}&skip=0`
+      }
+      if(initialState.seachQuery!==''){
+        url = `https://dummyjson.com/products`
+      }
+
       const response = await fetch(
-        `https://dummyjson.com/products?limit=${limit}&skip=0`
+        url
       );
 
       if (!response.ok) {
@@ -113,9 +121,7 @@ export const FetchSlice = createSlice({
     showMoreClick: (state) => {
       state.showMore += 5;
     },
-    setSearchQuery: (state, action) => {
-      state.seachQuery = action.payload;
-    },
+    
     add: (state, action) => {
       let i = 0;
       if (
@@ -163,6 +169,15 @@ export const FetchSlice = createSlice({
       );
       localStorage.setItem('productPageData',JSON.stringify(state.productPageData))
     },
+    setSearchQuery: (state, action) => {
+      state.seachQuery = action.payload;
+    },
+    searchProducts:(state,action)=>{
+      
+      
+      state.filteredProduct = state.data.filter((product)=>product.title.toUpperCase().includes(state.seachQuery.toUpperCase()))
+    }
+    ,
     addFavorite: (state, action) => {
       if (
         !state.favoriteProducts.find((item) => item.id === action.payload.id)
@@ -220,6 +235,6 @@ export const {
   productPageElement,
   addFavorite,
   ordered,
-  moreInfoOrder,
+  moreInfoOrder,searchProducts
 } = FetchSlice.actions;
 export default FetchSlice.reducer;
