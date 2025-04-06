@@ -28,7 +28,6 @@ const Navbar = () => {
   const { basketData, favoriteProducts,filteredProduct } = useSelector(
     (state: RootState) => state.fetch
   );
-  console.log(filteredProduct);
 
   const basketRef = useRef<HTMLDivElement>(null);
   const handleChange = () => {
@@ -90,8 +89,9 @@ const Navbar = () => {
           <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center max-sm:text-[10px]  ">
             <div className="flex cursor-pointer items-center ">
               <Search
-                onClick={() => {setIsVisible(!isVisible)
+                onClick={() => {setIsVisible(true)
                   dispatch(searchProducts(seachQuery))
+                  
                   isVisible&&navigate('/filteredProducts')
                 }}
                 className="w-5 h-5 max-sm:size-3 hover:text-gray-500 "

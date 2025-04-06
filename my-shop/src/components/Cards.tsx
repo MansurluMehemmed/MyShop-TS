@@ -8,15 +8,16 @@ import CardProps from "./CardProps";
 
 const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
-  let { data,  showMore } =
+  let { data,  showMore,seachQuery } =
     useSelector((state: RootState) => state.fetch);
-
+  
+  
   const selectedCategory = useSelector(
     (state: RootState) => state.fetch.selectedCategory
   );
   useEffect(() => {
     dispatch(fetchData(showMore));
-  }, [dispatch]);
+  }, [showMore]);
 
   const getFilteredProducts = () => {
     if (selectedCategory !== "ALL") {
@@ -26,7 +27,7 @@ const Cards = () => {
     } else {
       data = data;
     }
-
+    
     return data;
   };
   const filteredProducts = getFilteredProducts();

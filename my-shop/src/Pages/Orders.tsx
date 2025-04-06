@@ -9,7 +9,7 @@ const Orders = () => {
   const { orders } = useSelector((state: RootState) => state.fetch);
   useEffect(() => {
       window.scrollTo(0, 0);
-    }, []);
+    }, [orders]);
   return (
     <div className="flex w-full h-full justify-center">
       <div className="flex flex-col w-[80%] mt-[100px]">

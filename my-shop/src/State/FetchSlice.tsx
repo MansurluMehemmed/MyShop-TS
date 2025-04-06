@@ -39,7 +39,7 @@ interface Orders {
 
 export interface CardState {
   data: Product[];
-  category: string[];
+  categories: string[];
   isLoading: boolean;
   error: boolean;
   selectedCategory: string;
@@ -58,12 +58,13 @@ const persistedProductPageData = localStorage.getItem('productPageData')
 const persistedFavoriteProducts = localStorage.getItem('favoriteProducts')
 const persistedOrders = localStorage.getItem('orders')
 const persistedMoreInfoOrders = localStorage.getItem('moreInfoOrders')
+const persistedFilteredProduct = localStorage.getItem('filteredProduct')
 
 
 
 const initialState: CardState = {
   data: [],
-  category: [],
+  categories: [],
   isLoading: false,
   error: false,
   selectedCategory: "ALL",
@@ -74,23 +75,25 @@ const initialState: CardState = {
   favoriteProducts:persistedFavoriteProducts?JSON.parse(persistedFavoriteProducts): [],
   orders:persistedOrders?JSON.parse(persistedOrders): [],
   MoreInfoOrders:persistedMoreInfoOrders?JSON.parse(persistedMoreInfoOrders): [],
-  filteredProduct: [],
+  filteredProduct:persistedFilteredProduct?JSON.parse(persistedFilteredProduct): [],
 };
+let url=`https://dummyjson.com/products`;
 
 // ✅ `fetch` istifadə edərək API məlumatlarını əldə edən `createAsyncThunk`
-export const fetchData = createAsyncThunk<Product[], number>(
+export const fetchData = createAsyncThunk<Product[], number|string>(
   "fetchSlice",
-  async (limit) => {
+  async (props) => {
     // ✅ Burada limit arqument kimi gəlir
-    let url=`https://dummyjson.com/products` ;
+    
     try {
-      if(limit){
-        url = `https://dummyjson.com/products?limit=${limit}&skip=0`
-      }
-      if(initialState.seachQuery!==''){
-        url = `https://dummyjson.com/products`
-      }
+        if(typeof props==='number'){
 
+          url = `https://dummyjson.com/products?limit=${props}&skip=0`
+        }
+        if(typeof props ==='string'){
+          url = 'https://dummyjson.com/products'
+        }
+     
       const response = await fetch(
         url
       );
@@ -117,6 +120,7 @@ export const FetchSlice = createSlice({
   reducers: {
     selectedCategories: (state, action) => {
       state.selectedCategory = action.payload;
+      
     },
     showMoreClick: (state) => {
       state.showMore += 5;
@@ -174,8 +178,8 @@ export const FetchSlice = createSlice({
     },
     searchProducts:(state,action)=>{
       
-      
-      state.filteredProduct = state.data.filter((product)=>product.title.toUpperCase().includes(state.seachQuery.toUpperCase()))
+      state.filteredProduct = state.data.filter(product=>product.title.toUpperCase().includes(action.payload.toUpperCase()))
+      localStorage.setItem('filteredProduct',JSON.stringify(state.filteredProduct))
     }
     ,
     addFavorite: (state, action) => {
@@ -208,20 +212,20 @@ export const FetchSlice = createSlice({
   },
 
   extraReducers: (builder) => {
-    builder.addCase(fetchData.pending, (state) => {
-      state.isLoading = true;
-    });
+    // builder.addCase(fetchData.pending, (state) => {
+    //   state.isLoading = true;
+    // });
     builder.addCase(fetchData.fulfilled, (state, action) => {
       state.isLoading = false;
       state.data = action.payload;
-      state.category = Array.from(
+      state.categories = Array.from(
         new Set(action.payload.map((item) => item.category.toUpperCase()))
       );
     });
-    builder.addCase(fetchData.rejected, (state) => {
-      state.isLoading = false;
-      state.error = true;
-    });
+    // builder.addCase(fetchData.rejected, (state) => {
+    //   state.isLoading = false;
+    //   state.error = true;
+    // });
   },
 });
 export const {

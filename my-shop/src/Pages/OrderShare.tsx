@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
 import { Link, useNavigate } from "react-router-dom";
 import { deleteAll, ordered } from "../State/FetchSlice";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 const OrderShare = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
@@ -24,6 +24,9 @@ const OrderShare = () => {
       : item.price);
     total = Number((total + productTotal).toFixed(2));
   });
+   useEffect(() => {
+        window.scrollTo(0, 0);
+      }, []);
   const handleOrderedFunc = () => {
       const orderPayload = {
         product:basketData.map(product=>product),
