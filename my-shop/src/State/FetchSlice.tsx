@@ -19,7 +19,7 @@ export interface Product {
   category: string;
   brand: string;
   count: number;
-  rating: string;
+  rating: string|number;
   images: string[];
   availabilityStatus: string;
   shippingInformation: string;

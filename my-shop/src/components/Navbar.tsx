@@ -89,8 +89,9 @@ const Navbar = () => {
           <div className="gap-5 flex flex-row lg:gap-10    justify-between items-center max-sm:text-[10px]  ">
             <div className="flex cursor-pointer items-center ">
               <Search
-                onClick={() => {setIsVisible(true)
-                  dispatch(searchProducts(seachQuery))
+                onClick={() => {
+                  setIsVisible(true)
+                  seachQuery!==''&& dispatch(searchProducts(seachQuery))
                   
                   isVisible&&navigate('/filteredProducts')
                 }}
