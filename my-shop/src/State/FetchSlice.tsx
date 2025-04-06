@@ -40,9 +40,11 @@ interface Orders {
 export interface CardState {
   data: Product[];
   categories: string[];
+  brands:string[]
   isLoading: boolean;
   error: boolean;
   selectedCategory: string;
+  selectedBrand: string;
   showMore: number;
   seachQuery: string;
   basketData: Product[];
@@ -65,9 +67,11 @@ const persistedFilteredProduct = localStorage.getItem('filteredProduct')
 const initialState: CardState = {
   data: [],
   categories: [],
+  brands: [],
   isLoading: false,
   error: false,
   selectedCategory: "ALL",
+  selectedBrand:'',
   showMore: 10,
   seachQuery: "",
   basketData: persistedBasketData? JSON.parse(persistedBasketData): [],
@@ -120,6 +124,10 @@ export const FetchSlice = createSlice({
   reducers: {
     selectedCategories: (state, action) => {
       state.selectedCategory = action.payload;
+      
+    },
+    selectedBrands: (state, action) => {
+      state.selectedBrand = action.payload;
       
     },
     showMoreClick: (state) => {
@@ -221,6 +229,8 @@ export const FetchSlice = createSlice({
       state.categories = Array.from(
         new Set(action.payload.map((item) => item.category.toUpperCase()))
       );
+      state.brands = Array.from(new Set(action.payload.map(item=>item.brand?.toUpperCase())))
+  
     });
     // builder.addCase(fetchData.rejected, (state) => {
     //   state.isLoading = false;
@@ -239,6 +249,6 @@ export const {
   productPageElement,
   addFavorite,
   ordered,
-  moreInfoOrder,searchProducts
+  moreInfoOrder,searchProducts,selectedBrands
 } = FetchSlice.actions;
 export default FetchSlice.reducer;
