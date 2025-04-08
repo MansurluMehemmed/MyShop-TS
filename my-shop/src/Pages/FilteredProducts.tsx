@@ -3,6 +3,8 @@ import { AppDispatch, RootState } from "../State/store";
 import { useEffect, useState } from "react";
 import {
   fetchData,
+  filteredBrands,
+  filteredSearch,
   selectedBrands,
   selectedCategories,
 } from "../State/FetchSlice";
@@ -23,8 +25,11 @@ const FilteredProducts = () => {
   const [maxPrice, setMaxPrice] = useState<number | undefined>();
   const [filter, setFilter] = useState("all");
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  
+  
   useEffect(() => {
     dispatch(fetchData(seachQuery));
+    
     window.scrollTo(0, 0);
   }, []);
   const handleChangeMinPrice = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -40,18 +45,10 @@ const FilteredProducts = () => {
   const getFilteredProducts = () => {
     let filteredProducts = [...filteredProduct];
 
-    if (selectedCategory !== "ALL") {
-      filteredProducts = filteredProducts.filter(
-        (product) =>
-          product.category.toUpperCase() === selectedCategory.toUpperCase()
-      );
+    if(selectedCategory!=='ALL'){
+      filteredProducts = filteredProducts.filter(prdouct=>prdouct.category.toUpperCase()===selectedCategory.toUpperCase())
     }
-    if (selectedBrand !== "") {
-      filteredProducts = filteredProducts.filter(
-        (product) =>
-          product.brand.toUpperCase() === selectedBrand?.toUpperCase()
-      );
-    }
+    
     if (minPrice !== undefined) {
       filteredProducts = filteredProducts.filter(
         (product) => product.price >= minPrice
@@ -70,7 +67,7 @@ const FilteredProducts = () => {
       case "cheap":
         return filteredProducts.sort((a, b) => a.price - b.price);
       case "popular":
-        return filteredProducts.sort((a, b) => b.rating - a.rating);
+        return filteredProducts.sort((a, b) => Number(b.rating) -Number( a.rating));
       default:
         return filteredProducts;
     }
@@ -83,6 +80,7 @@ const FilteredProducts = () => {
     dispatch(selectedBrands(""));
     setMinPrice(undefined);
     setMaxPrice(undefined);
+    dispatch(filteredSearch('data'))
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -117,17 +115,24 @@ const FilteredProducts = () => {
             </div>
             <section>
               {categories.map((category, index) => (
-                <label key={index} className=" block mb-2">
-                  <input
-                    type="radio"
-                    name="category"
-                    value={category}
-                    onChange={() => dispatch(selectedCategories(category))}
-                    className="mr-2 w-[16px] h-[16px]"
-                    checked={selectedCategory===category}
-                  />
+                <div key={index} onClick={()=>{
+                  dispatch(selectedCategories(category))
+                }} className={`${selectedCategory===category?'activeCategory':''} cursor-pointer hover:bg-[rgb(245, 245, 245)] p-2 rounded  flex mb-2 border shadow `}>
                   {category.toUpperCase()}
-                </label>
+                </div>
+                // <label key={index} className=" block mb-2">
+                //   <input
+                //     type="radio"
+                //     name="category"
+                //     value={category}
+                //     onChange={() => {dispatch(selectedCategories(category))
+                //       dispatch(filteredCategory(category))
+                //     }}
+                //     className="mr-2 w-[16px] h-[16px]"
+                //     checked={selectedCategory===category}
+                //   />
+                //   {category.toUpperCase()}
+                // </label>
               ))}
             </section>
             <div className="mb-5">
@@ -138,10 +143,11 @@ const FilteredProducts = () => {
                 <label key={index} className=" block mb-2">
                   <input
                     type="radio"
-                    name="category"
+                    name="brand"
                     value={brand}
                     onChange={() => {
                       dispatch(selectedBrands(brand));
+                      dispatch(filteredBrands(brand))
                       window.scrollTo({
                         top: 0,
                         behavior: "smooth",
@@ -150,7 +156,7 @@ const FilteredProducts = () => {
                     checked={selectedBrand===brand}
                     className="mr-2 w-[16px] h-[16px]"
                   />
-                  {brand !== undefined ? brand : ""}
+                  {brand }
                 </label>
               ))}
             </section>

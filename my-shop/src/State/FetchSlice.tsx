@@ -19,7 +19,7 @@ export interface Product {
   category: string;
   brand: string;
   count: number;
-  rating: string|number;
+  rating: string;
   images: string[];
   availabilityStatus: string;
   shippingInformation: string;
@@ -40,7 +40,7 @@ interface Orders {
 export interface CardState {
   data: Product[];
   categories: string[];
-  brands:string[]
+  brands: string[];
   isLoading: boolean;
   error: boolean;
   selectedCategory: string;
@@ -55,14 +55,12 @@ export interface CardState {
   filteredProduct: Product[];
 }
 
-const persistedBasketData = localStorage.getItem('basketData')
-const persistedProductPageData = localStorage.getItem('productPageData')
-const persistedFavoriteProducts = localStorage.getItem('favoriteProducts')
-const persistedOrders = localStorage.getItem('orders')
-const persistedMoreInfoOrders = localStorage.getItem('moreInfoOrders')
-const persistedFilteredProduct = localStorage.getItem('filteredProduct')
-
-
+const persistedBasketData = localStorage.getItem("basketData");
+const persistedProductPageData = localStorage.getItem("productPageData");
+const persistedFavoriteProducts = localStorage.getItem("favoriteProducts");
+const persistedOrders = localStorage.getItem("orders");
+const persistedMoreInfoOrders = localStorage.getItem("moreInfoOrders");
+const persistedFilteredProduct = localStorage.getItem("filteredProduct");
 
 const initialState: CardState = {
   data: [],
@@ -71,36 +69,41 @@ const initialState: CardState = {
   isLoading: false,
   error: false,
   selectedCategory: "ALL",
-  selectedBrand:'',
+  selectedBrand: "",
   showMore: 10,
   seachQuery: "",
-  basketData: persistedBasketData? JSON.parse(persistedBasketData): [],
-  productPageData:persistedProductPageData?JSON.parse(persistedProductPageData): [],
-  favoriteProducts:persistedFavoriteProducts?JSON.parse(persistedFavoriteProducts): [],
-  orders:persistedOrders?JSON.parse(persistedOrders): [],
-  MoreInfoOrders:persistedMoreInfoOrders?JSON.parse(persistedMoreInfoOrders): [],
-  filteredProduct:persistedFilteredProduct?JSON.parse(persistedFilteredProduct): [],
+  basketData: persistedBasketData ? JSON.parse(persistedBasketData) : [],
+  productPageData: persistedProductPageData
+    ? JSON.parse(persistedProductPageData)
+    : [],
+  favoriteProducts: persistedFavoriteProducts
+    ? JSON.parse(persistedFavoriteProducts)
+    : [],
+  orders: persistedOrders ? JSON.parse(persistedOrders) : [],
+  MoreInfoOrders: persistedMoreInfoOrders
+    ? JSON.parse(persistedMoreInfoOrders)
+    : [],
+  filteredProduct: persistedFilteredProduct
+    ? JSON.parse(persistedFilteredProduct)
+    : [],
 };
-let url=`https://dummyjson.com/products`;
+let url = `https://dummyjson.com/products`;
 
 // ✅ `fetch` istifadə edərək API məlumatlarını əldə edən `createAsyncThunk`
-export const fetchData = createAsyncThunk<Product[], number|string>(
+export const fetchData = createAsyncThunk<Product[], number | string>(
   "fetchSlice",
   async (props) => {
     // ✅ Burada limit arqument kimi gəlir
-    
-    try {
-        if(typeof props==='number'){
 
-          url = `https://dummyjson.com/products?limit=${props}&skip=0`
-        }
-        if(typeof props ==='string'){
-          url = 'https://dummyjson.com/products'
-        }
-     
-      const response = await fetch(
-        url
-      );
+    try {
+      if (typeof props === "number") {
+        url = `https://dummyjson.com/products?limit=${props}&skip=0`;
+      }
+      if (typeof props === "string") {
+        url = "https://dummyjson.com/products";
+      }
+
+      const response = await fetch(url);
 
       if (!response.ok) {
         const errorMessage = await response.text();
@@ -124,16 +127,14 @@ export const FetchSlice = createSlice({
   reducers: {
     selectedCategories: (state, action) => {
       state.selectedCategory = action.payload;
-      
     },
     selectedBrands: (state, action) => {
       state.selectedBrand = action.payload;
-      
     },
     showMoreClick: (state) => {
       state.showMore += 5;
     },
-    
+
     add: (state, action) => {
       let i = 0;
       if (
@@ -162,34 +163,63 @@ export const FetchSlice = createSlice({
       } else {
         state.basketData = [action.payload, ...state.basketData];
       }
-      localStorage.setItem('basketData',JSON.stringify(state.basketData))
+      localStorage.setItem("basketData", JSON.stringify(state.basketData));
     },
     deleteProducts: (state, action) => {
       state.basketData = state.basketData.filter(
         (product) => product.id !== action.payload
       );
-      localStorage.setItem('basketData',JSON.stringify(state.basketData))
+      localStorage.setItem("basketData", JSON.stringify(state.basketData));
     },
     deleteAll: (state) => {
       state.basketData = [];
-      localStorage.setItem('basketData',JSON.stringify(state.basketData))
-
+      localStorage.setItem("basketData", JSON.stringify(state.basketData));
     },
     productPageElement: (state, action) => {
       state.productPageData = state.data.filter(
         (product) => product.id === action.payload
       );
-      localStorage.setItem('productPageData',JSON.stringify(state.productPageData))
+      localStorage.setItem(
+        "productPageData",
+        JSON.stringify(state.productPageData)
+      );
     },
     setSearchQuery: (state, action) => {
       state.seachQuery = action.payload;
     },
-    searchProducts:(state,action)=>{
-      
-      state.filteredProduct = state.data.filter(product=>product.title.toUpperCase().includes(action.payload.toUpperCase()))
-      localStorage.setItem('filteredProduct',JSON.stringify(state.filteredProduct))
-    }
-    ,
+    filteredSearch: (state, action) => {
+      if (state.seachQuery !== "") {
+        state.filteredProduct = state.data.filter((product) =>
+          product.title.toUpperCase().includes(action.payload.toUpperCase())
+        );
+      }if(action.payload='data'){
+        state.filteredProduct = state.data
+      }
+
+      localStorage.setItem(
+        "filteredProduct",
+        JSON.stringify(state.filteredProduct)
+      );
+    },
+    filteredBrands: (state, action) => {
+      if(state.filteredProduct.length>0||state.seachQuery!==''){
+        state.filteredProduct = state.filteredProduct.filter(
+          (product) =>
+            product.brand?.toUpperCase() === action.payload?.toUpperCase()
+        );
+      }else{
+        state.filteredProduct = state.data.filter(
+          (product) =>
+            product.brand?.toUpperCase() === action.payload?.toUpperCase()
+        );
+      }
+      localStorage.setItem(
+        "filteredProduct",
+        JSON.stringify(state.filteredProduct)
+      );
+    },
+
+    
     addFavorite: (state, action) => {
       if (
         !state.favoriteProducts.find((item) => item.id === action.payload.id)
@@ -202,20 +232,23 @@ export const FetchSlice = createSlice({
           ),
         ];
       }
-      localStorage.setItem('favoriteProducts',JSON.stringify(state.favoriteProducts))
-
+      localStorage.setItem(
+        "favoriteProducts",
+        JSON.stringify(state.favoriteProducts)
+      );
     },
     ordered: (state, action) => {
       state.orders = [action.payload, ...state.orders];
-      localStorage.setItem('orders',JSON.stringify(state.orders))
-
+      localStorage.setItem("orders", JSON.stringify(state.orders));
     },
     moreInfoOrder: (state, action) => {
       state.MoreInfoOrders = state.orders.filter(
         (order) => order.id === action.payload
       );
-      localStorage.setItem('moreInfoOrders',JSON.stringify(state.MoreInfoOrders))
-
+      localStorage.setItem(
+        "moreInfoOrders",
+        JSON.stringify(state.MoreInfoOrders)
+      );
     },
   },
 
@@ -229,8 +262,9 @@ export const FetchSlice = createSlice({
       state.categories = Array.from(
         new Set(action.payload.map((item) => item.category.toUpperCase()))
       );
-      state.brands = Array.from(new Set(action.payload.map(item=>item.brand?.toUpperCase())))
-  
+      state.brands = Array.from(
+        new Set(action.payload.map((item) => item.brand?.toUpperCase()))
+      );
     });
     // builder.addCase(fetchData.rejected, (state) => {
     //   state.isLoading = false;
@@ -249,6 +283,10 @@ export const {
   productPageElement,
   addFavorite,
   ordered,
-  moreInfoOrder,searchProducts,selectedBrands
+  moreInfoOrder,
+  filteredSearch,
+  filteredBrands,
+  
+  selectedBrands,
 } = FetchSlice.actions;
 export default FetchSlice.reducer;

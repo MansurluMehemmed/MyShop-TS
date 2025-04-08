@@ -10,6 +10,12 @@ button{cursor: pointer;}
   background-color: rgb(255, 70, 70);
   color: white;
 }
+.activeCategory{
+  background-color: rgb(245, 245, 245);
+  color: black;
+  
+  border: 1px solid ;
+}
 @layer components {
   .order-details p {
     @apply text-[#9497ad] text-[14px];

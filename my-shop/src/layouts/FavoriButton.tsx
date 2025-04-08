@@ -9,10 +9,7 @@ const FavoriButton = () => {
     return fav? JSON.parse(fav):false
   })
   const dispatch = useDispatch<AppDispatch>()
-  useEffect(()=>{
-    localStorage.setItem('favoriButton',JSON.stringify(active))
 
-  },[active])
   return (
     <div>
         

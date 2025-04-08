@@ -11,13 +11,14 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-scroll";
 import { AppDispatch, RootState } from "../State/store";
-import { searchProducts, setSearchQuery } from "../State/FetchSlice";
+import { filteredSearch, setSearchQuery } from "../State/FetchSlice";
 import Basket from "./Basket";
 import { NavLink, useNavigate } from "react-router-dom";
 import OutsideClickAlert from "../hooks/OutsideClickAlert";
 // import useOutsideClickAlert from "../hooks/useOutsideClickAlert";
 const Navbar = () => {
   const dispatch = useDispatch<AppDispatch>();
+  const inputRef = useRef<HTMLInputElement>(null);
   const navigate = useNavigate()
   const [basketMenu, setBasketMenu] = useState(false);
   const [menu, setMenu] = useState(false);
@@ -91,14 +92,17 @@ const Navbar = () => {
               <Search
                 onClick={() => {
                   setIsVisible(true)
-                  seachQuery!==''&& dispatch(searchProducts(seachQuery))
-                  
+                  seachQuery!==''&& dispatch(filteredSearch(seachQuery))
+                 if(inputRef.current){
+                   inputRef.current.value=''
+                 }
                   isVisible&&navigate('/filteredProducts')
                 }}
                 className="w-5 h-5 max-sm:size-3 hover:text-gray-500 "
               />
                 <input
                   onChange={(e) => dispatch(setSearchQuery(e.target.value))}
+                  ref={inputRef}
                   type="text"
                   placeholder="Search..."
                   className={`ml-2 ${isVisible ? "flex" : "hidden"} outline-none`}

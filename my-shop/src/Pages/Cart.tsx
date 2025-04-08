@@ -4,6 +4,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { add, decrease, deleteProducts } from "../State/FetchSlice";
 import { Link, useNavigate } from "react-router-dom";
 import CartSection from "../layouts/CartSection";
+import { useEffect } from "react";
 
 const Payment = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -11,7 +12,9 @@ const Payment = () => {
   const { basketData } = useSelector((state: RootState) => state.fetch);
   let total: number = 0;
 // const [cart,useCart]= [{},{}]
-
+  useEffect(()=>{
+    window.scrollTo(0,0)
+  },[])
   basketData.forEach((item) => {
     let productTotal =
       item.count *
