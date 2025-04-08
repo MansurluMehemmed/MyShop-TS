@@ -88,7 +88,7 @@ const FilteredProducts = () => {
   };
   return (
     <div className="w-full flex justify-center mt-[100px]">
-      <div className="flex gap-10 w-[90%] max-md:flex-col bg-white">
+      <div className="flex gap-10 w-[90%] max-md:flex-col ">
         <div className="w-64 p-5 h-screen">
           <h1 className="text-2xl font-bold mb-10 ">Filter Products</h1>
           <section>
@@ -160,17 +160,7 @@ const FilteredProducts = () => {
                 </label>
               ))}
             </section>
-            {/* {Keywords Section} */}
-            {/* <div className="mb-5 mt-4">
-            <h2 className="text-xl font-semibold mb-3">Keywords</h2>
-            <div>
-                {keywords.map((keyword,index)=>(
-                    <button key={index} 
-                    onClick={()=>handleKeywordClick(keyword)}
-                    className="block mb-2 px-4 py-2 w-full text-left border rounded hover:bg-gray-200">{keyword.toUpperCase()}</button>
-                ))}
-            </div>
-        </div> */}
+            
             <button
               onClick={() => clickResetFilters()}
               className="w-full mb-[4rem] py-2 bg-black text-white rounded mt-5"
@@ -219,7 +209,7 @@ const FilteredProducts = () => {
               </div>
             )}
           </div>
-          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 max-sm:grid-cols-2 flex-wrap ">
+          <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 max-sm:grid-cols-2 flex-wrap gap-[8px] ">
             {filteredProducts.length === 0 ? (
               <p className="text-2xl text-red-500 mt-5">No product found...</p>
             ) : (

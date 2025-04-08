@@ -24,15 +24,15 @@ const Payment = () => {
     total = Number((total + productTotal).toFixed(2));
   });
   return (
-    <div className="w-full flex flex-col items-center  bg-[#ebebeb] h-full absolute ">
-      <div className="flex flex-col  relative w-[80%] mt-[140px] gap-10 min-h-[20%] bg-white justify-between">
+    <div className="w-full flex flex-col items-center   bg-[#ebebeb] h-full py-10 mb-10 relative ">
+      <div className="flex flex-col   w-[80%]  mt-[100px] gap-10 min-h-[20%] max-h-[80%] bg-white justify-between">
         <button
           onClick={() => navigate(-1)}
           className=" flex fixed z-30 max-md:left-3  left-20 justify-self-start self-start px-5 py-2 bg-red-600 text-white rounded cursor-pointer"
         >
           Back
         </button>
-        <div className="flex py-10 flex-col gap-10">
+        <div className="flex py-5 flex-col gap-10">
           <CartSection />
           <h2 className="text-xl self-end mr-10">Total price : ${total}</h2>
         </div>

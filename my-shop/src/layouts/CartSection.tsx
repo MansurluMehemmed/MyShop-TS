@@ -10,7 +10,7 @@ const CartSection = () => {
   const { basketData } = useSelector((state: RootState) => state.fetch);
 
   return (
-    <ul className="flex flex-col px-5 overflow-y-scroll gap-[10px] max-h-[400px]     w-full m-0 p-0">
+    <ul className="flex flex-col px-5 overflow-y-scroll  gap-[10px] max-h-[400px]     w-full m-0 p-0">
       {basketData.length === 0 ? (
         <p className="text-[18px] flex self-center justify-self-center text-red-400">
           The cart is empty.

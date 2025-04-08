@@ -16,7 +16,7 @@ const FavoriProducts = () => {
   return (
    
     <div className='flex w-full h-full justify-center items-center  '>
-      <div className='w-[80%]  mt-[100px]  grid grid-cols-1  max-sm:grid-cols-2 gap-0  max-lg:gap-[10px] sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5   px-0 md:px-10'>
+      <div className='w-[80%]  mt-[100px]  grid grid-cols-1  max-sm:grid-cols-2 gap-[5px]  max-lg:gap-[10px] sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5   px-0 md:px-10'>
     {favoriteProducts.map((item)=>(
         
         <CardProps key={item.id} item={{...item}}/>

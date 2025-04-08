@@ -1,5 +1,6 @@
 import Brands from "../components/Brands";
 import Footer from "../components/Footer";
+import MostRecentlyViewed from "../components/MostRecentlyViewed";
 import NewArivals from "../components/NewArivals";
 import Slider from "../components/Slider";
 
@@ -13,6 +14,7 @@ const Home = () => {
       <Slider images={imagesSlider} />
       <NewArivals />
       <Brands/>
+      <MostRecentlyViewed/>
       <Footer />
     </>
   );

@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <div className="w-100% flex justify-center items-center h-[260px] max-sm:h-[200px]">
+    <div className="w-100% flex justify-center bg-white items-center h-[260px] max-sm:h-[200px]">
       <div className="flex flex-col justify-between gap-20 w-[80%]  ">
         <div className="flex flex-row max-sm:flex-col max-sm:gap-10 w-full justify-between items-center ">
           <section className="flex flex-row items-center justify-between gap-10 text-[#51545f] max-sm:text-[11px] text-[14px]">
