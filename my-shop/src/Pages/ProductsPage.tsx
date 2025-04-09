@@ -1,4 +1,3 @@
-
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
@@ -33,10 +32,7 @@ const ProductsPage = () => {
                 key={product.id}
                 className="flex w-full mx-[10px] md:w-[50%] md:mx-0 h-screen"
               >
-               
-
-<ImageSlider images={product.images} interval={4000}/>
-               
+                <ImageSlider images={product.images} interval={4000} />
               </div>
               <div className="flex w-full md:w-[50%] flex-col ">
                 <h2 className="font-semibold text-2xl mb-[10px]">

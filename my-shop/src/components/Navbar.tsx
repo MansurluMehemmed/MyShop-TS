@@ -26,7 +26,7 @@ const Navbar = () => {
   let { seachQuery } = useSelector(
     (state: RootState) => state.fetch
   );
-  const { basketData, favoriteProducts,filteredProduct } = useSelector(
+  const { basketData, favoriteProducts } = useSelector(
     (state: RootState) => state.fetch
   );
 
@@ -41,16 +41,13 @@ const Navbar = () => {
     setBasketMenu(!basketMenu);
   };
 
-  // function handleOutsideClickFunction(params: type) {
-  //   setBasketMenu(false);
-  // }
   const handleOutsideClick = () => {
     setBasketMenu(false);
   };
   return (
     <header
       className="flex fixed bg-white top-0 z-100 flex-row w-full h-[100px] justify-center items-center"
-      // ref={ref}
+      
     >
       <div className="flex  relative bg-white w-[80%]">
         <nav className=" flex w-full justify-between items-center ">

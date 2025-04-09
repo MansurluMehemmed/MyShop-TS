@@ -11,6 +11,7 @@ import MoreInfoOrders from "./Pages/MoreInfoOrders";
 import FilteredProducts from "./Pages/FilteredProducts";
 
 function App() {
+  
   return (
     <>
       <Navbar />

@@ -3,7 +3,7 @@ import { AppDispatch } from "../State/store";
 import FavoriButton from "../layouts/FavoriButton";
 import { Link } from "react-router-dom";
 import { useState} from "react";
-import { add, addFavorite, Product, productPageElement,  } from "../State/FetchSlice";
+import { add, addFavorite, mostRecentlyAdd, Product, productPageElement,  } from "../State/FetchSlice";
 
 interface CardPropsType{
     item:Product
@@ -35,7 +35,9 @@ const CardProps:React.FC<CardPropsType> = ({item}) => {
             <Link
               to={`/productpage/${item.id}`}
               className="text-[#1e1e27] hover:text-gray-500 flex max-sm:text-[13px] items-center justify-center h-[55px] text-[18px]"
-              onClick={()=>{dispatch(productPageElement(item.id))}}
+              onClick={()=>{dispatch(productPageElement(item.id))
+                dispatch(mostRecentlyAdd(item))
+              }}
             >
               {item.title}
             </Link>

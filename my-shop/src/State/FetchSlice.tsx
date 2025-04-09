@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { act } from "react";
 
 interface Review {
   rating: number;
@@ -26,6 +27,7 @@ export interface Product {
   warrantyInformation: string;
   returnPolicy: string;
   reviews: Review[];
+
 }
 
 interface Orders {
@@ -53,6 +55,7 @@ export interface CardState {
   orders: Orders[];
   MoreInfoOrders: Orders[];
   filteredProduct: Product[];
+  mostRecentlyProducts:Product[]
 }
 
 const persistedBasketData = localStorage.getItem("basketData");
@@ -61,6 +64,7 @@ const persistedFavoriteProducts = localStorage.getItem("favoriteProducts");
 const persistedOrders = localStorage.getItem("orders");
 const persistedMoreInfoOrders = localStorage.getItem("moreInfoOrders");
 const persistedFilteredProduct = localStorage.getItem("filteredProduct");
+const persistedMostRecently= localStorage.getItem("mostRecentlyProducts");
 
 const initialState: CardState = {
   data: [],
@@ -86,6 +90,7 @@ const initialState: CardState = {
   filteredProduct: persistedFilteredProduct
     ? JSON.parse(persistedFilteredProduct)
     : [],
+    mostRecentlyProducts:persistedMostRecently?JSON.parse(persistedMostRecently):[]
 };
 let url = `https://dummyjson.com/products`;
 
@@ -250,6 +255,20 @@ export const FetchSlice = createSlice({
         JSON.stringify(state.MoreInfoOrders)
       );
     },
+    mostRecentlyAdd:(state,action)=>{
+     
+      if(state.mostRecentlyProducts.find((item)=>{
+        
+        return item.id===action.payload.id
+      })){
+
+        const mostlyProduct= state.mostRecentlyProducts.filter((product)=>product.id!==action.payload.id)
+        state.mostRecentlyProducts = [action.payload,...mostlyProduct]
+      }else{
+        state.mostRecentlyProducts = [action.payload,...state.mostRecentlyProducts]
+      }
+      localStorage.setItem('mostRecentlyProducts',JSON.stringify(state.mostRecentlyProducts))
+    }
   },
 
   extraReducers: (builder) => {
@@ -286,7 +305,7 @@ export const {
   moreInfoOrder,
   filteredSearch,
   filteredBrands,
-  
+  mostRecentlyAdd,
   selectedBrands,
 } = FetchSlice.actions;
 export default FetchSlice.reducer;

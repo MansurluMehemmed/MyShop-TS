@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import Brands from "../components/Brands";
 import Footer from "../components/Footer";
 import MostRecentlyViewed from "../components/MostRecentlyViewed";
@@ -9,6 +10,9 @@ const Home = () => {
       'https://themewagon.github.io/coloshop/images/slider_1.jpg',
   
     ]
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    });
   return (
     <>
       <Slider images={imagesSlider} />
