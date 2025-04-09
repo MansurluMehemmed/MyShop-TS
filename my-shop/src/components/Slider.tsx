@@ -42,7 +42,7 @@ const Slider: React.FC<ImageSliderProps> = ({ images, interval = 5000 }) => {
           </h1>
           <Link
             className="text-white w-32 max-sm:w-25 sm:w-28 max-sm:py-1 bg-red-500 flex items-center justify-center cursor-pointer py-2 rounded hover:bg-red-400 transition duration-200 ease-linear"
-            to=""
+            to="newArrivals"
           >
             Show now
           </Link>
@@ -57,7 +57,7 @@ const Slider: React.FC<ImageSliderProps> = ({ images, interval = 5000 }) => {
       />
 
       {/* Sol düymə */}
-      {images.length > 1 && (
+      {(
         <button
           onClick={goToPrevious}
           className="absolute top-1/2 left-4 transform -translate-y-1/2 text-4xl bg-gray-300 bg-opacity-50 text-white border-none p-2 rounded-full cursor-pointer"
@@ -67,7 +67,7 @@ const Slider: React.FC<ImageSliderProps> = ({ images, interval = 5000 }) => {
       )}
 
       {/* Sağ düymə */}
-      {images.length > 1 && (
+      { (
         <button
           onClick={goToNext}
           className="absolute top-1/2 right-4 transform -translate-y-1/2 text-4xl bg-gray-300 bg-opacity-50 text-white border-none p-2 rounded-full cursor-pointer"
@@ -75,6 +75,7 @@ const Slider: React.FC<ImageSliderProps> = ({ images, interval = 5000 }) => {
           ›
         </button>
       )}
+      
     </div>
   );
 };
