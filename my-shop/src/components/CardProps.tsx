@@ -7,7 +7,7 @@ import { add, addFavorite, mostRecentlyAdd, Product, productPageElement,  } from
 
 interface CardPropsType{
     item:Product
-    
+
 }
 
 
@@ -20,7 +20,7 @@ const CardProps:React.FC<CardPropsType> = ({item}) => {
         key={item.id}
        
           
-          className=" w-auto  h-fit flex group relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col  hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
+          className=" w-full  h-fit flex group relative cursor-pointer border-r-[#EBEBEB]  bg-white flex-col  hover:shadow-[0_25px_29px_rgba(63,78,100,0.15)] transition-transform duration-300 ease-linear hover:border-2 hover:border-solid hover:border-[#EBEBEB]  hover:rounded-lg "
         >
           <div className="w-full flex  ">
             <img
