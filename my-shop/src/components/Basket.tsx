@@ -1,11 +1,8 @@
-import { AiOutlineDelete } from "react-icons/ai";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
-import { add, decrease, deleteAll, deleteProducts } from "../State/FetchSlice";
+import {  deleteAll } from "../State/FetchSlice";
 import { Link } from "react-router-dom";
-import { useEffect } from "react";
-import { FaRegHeart } from "react-icons/fa";
-import CartSection from "../layouts/CartSection";
 
 interface ChildProps {
   setBasketMenu: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,7 +24,7 @@ const Basket: React.FC<ChildProps> = ({ setBasketMenu,ref }) => {
 
   return (
     <>
-      <div ref={ref} className="flex py-5  rounded flex-col gap-10 bg-[#ebebeb]  w-[600px] top-10 right-[15px] transition-all duration-1000 absolute z-25 h-auto max-h-[500px]">
+      <div ref={ref} className="flex py-5 max-lg:hidden rounded flex-col gap-10 bg-[#ebebeb]  w-[600px] top-10 right-[15px] transition-all duration-1000 absolute z-25 h-auto max-h-[500px]">
          <ul className="flex flex-col px-5 overflow-y-scroll gap-[10px] max-h-[400px]     w-full m-0 p-0">
               {basketData.length === 0 ? (
                 <p className="text-[18px] flex self-center justify-self-center text-red-400">

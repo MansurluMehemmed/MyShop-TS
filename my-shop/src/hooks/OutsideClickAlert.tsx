@@ -8,7 +8,7 @@ type OutsideClickAlertProps = {
 
 const OutsideClickAlert: React.FC<OutsideClickAlertProps> = ({ onOutsideClick, children, basketRef }) => {
   const ref = useRef<HTMLDivElement>(null);
-
+  
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
       // Basket divinin daxilində klik varsa, outside click hadisəsini işlətmə

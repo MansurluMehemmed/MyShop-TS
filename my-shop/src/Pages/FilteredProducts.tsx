@@ -120,19 +120,7 @@ const FilteredProducts = () => {
                 }} className={`${selectedCategory===category?'activeCategory':''} cursor-pointer hover:bg-[rgb(245, 245, 245)] p-2 rounded  flex mb-2 border shadow `}>
                   {category.toUpperCase()}
                 </div>
-                // <label key={index} className=" block mb-2">
-                //   <input
-                //     type="radio"
-                //     name="category"
-                //     value={category}
-                //     onChange={() => {dispatch(selectedCategories(category))
-                //       dispatch(filteredCategory(category))
-                //     }}
-                //     className="mr-2 w-[16px] h-[16px]"
-                //     checked={selectedCategory===category}
-                //   />
-                //   {category.toUpperCase()}
-                // </label>
+                
               ))}
             </section>
             <div className="mb-5">
@@ -173,7 +161,7 @@ const FilteredProducts = () => {
           <div className="flex">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="border px-4 py-2 rounded-full flex items-center "
+              className="border px-4 py-2  flex items-center "
             >
               <Tally3 className="mr-2" />
               {filter === "all"
@@ -181,7 +169,7 @@ const FilteredProducts = () => {
                 : filter.charAt(0).toLowerCase() + filter.slice(1)}
             </button>
             {dropdownOpen && (
-              <div className="absolute z-100 bg-white border border-gray-300 rounded mt-2 w-full sm:w-40">
+              <div className="absolute z-100 top-8 bg-white border border-gray-300 rounded mt-2 w-full sm:w-40">
                 <button
                   onClick={() => {setFilter("cheap")
                     setDropdownOpen(false)

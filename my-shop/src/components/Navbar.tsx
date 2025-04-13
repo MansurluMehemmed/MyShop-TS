@@ -31,6 +31,12 @@ const Navbar = () => {
   );
 
   const basketRef = useRef<HTMLDivElement>(null);
+  function orderedLink() {
+    const isLargeScreen = window.innerWidth <= 1024;
+    const linkTo = isLargeScreen ? '/isOrdered' : '';    
+    return linkTo;
+  }
+  
   const handleChange = () => {
     setMenu(!menu);
   };
@@ -110,7 +116,7 @@ const Navbar = () => {
               to="/favorites"
               className="cursor-pointer hover:text-gray-500 relative"
             >
-              <FaRegHeart size={19} />
+              <FaRegHeart  className="text-[20px] max-sm:text-[12px] sm:text-[16px]" />
               {favoriteProducts.length !== 0 && (
                 <span className="bg-red-600 rounded-full absolute bottom-[10px] left-[10px]  flex  max-sm:h-2  max-sm:w-2  max-sm:text-[10px] text-[14px] text-white items-center justify-center w-[16px] h-[16px]">
                   {favoriteProducts.length}
@@ -136,9 +142,12 @@ const Navbar = () => {
               basketRef={basketRef}
             >
               <div
-                onClick={() => toggleBasket()}
-                className="cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] max-sm:w-[25px] max-sm:h-[25px] bg-gray-300"
+                onClick={() => {toggleBasket()
+                  navigate(orderedLink())
+                }}
+                className={`cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] max-sm:w-[25px] max-sm:h-[25px] bg-gray-300 `}
               >
+              
                 <FaShoppingCart className="hover:text-gray-500 " />
                 {basketData.length !== 0 && (
                   <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 max-sm:h-2  max-sm:w-2  max-sm:text-[10px] text-[15px] text-white items-center justify-center w-4">
@@ -146,12 +155,12 @@ const Navbar = () => {
                   </span>
                 )}
                 {basketMenu && (
-                  <Basket setBasketMenu={setBasketMenu} ref={basketRef} />
+                  <Basket  setBasketMenu={setBasketMenu} ref={basketRef} />
                 )}
               </div>
             </OutsideClickAlert>
 
-            <div className="md:hidden cursor-pointer flex ">
+            <div className="md:hidden  cursor-pointer flex ">
               {menu ? (
                 <AiOutlineClose
                   className="max-sm:text-[14px] sm:text-[25px]"
@@ -168,7 +177,7 @@ const Navbar = () => {
         </nav>
       </div>
       <div
-        className={`  ${menu ? "translate-x-0" : "translate-x-full "} z-10 md:hidden flex flex-col gap-5 absolute right-0 w-full sm:w-[400px] h-screen pl-5 text-xl pt-10 transition-transform bg-gray-50  font-medium duration-300   `}
+        className={`  ${menu ? "translate-x-0" : "translate-x-full "} z-10 md:hidden flex flex-col gap-5 top-0 absolute right-0 w-full sm:w-[400px] h-screen pl-5 text-xl pt-10 transition-transform bg-gray-50  font-medium duration-300   `}
       >
         <div className="flex items-end justify-end pr-5">
           {menu ? (

@@ -1,8 +1,6 @@
-import { add, addFavorite, productPageElement } from "../State/FetchSlice";
+
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
-import FavoriButton from "../layouts/FavoriButton";
-import { Link } from "react-router-dom";
 import CardProps from "../components/CardProps";
 
 const FavoriProducts = () => {
