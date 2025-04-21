@@ -143,12 +143,12 @@ const Navbar = () => {
             >
               <div
                 onClick={() => {toggleBasket()
-                  navigate(orderedLink())
+                  
                 }}
                 className={`cursor-pointer relative rounded-full flex justify-center items-center w-[40px] h-[40px] max-sm:w-[25px] max-sm:h-[25px] bg-gray-300 `}
               >
               
-                <FaShoppingCart className="hover:text-gray-500 " />
+                <FaShoppingCart onClick={()=>navigate(orderedLink())} className="hover:text-gray-500 " />
                 {basketData.length !== 0 && (
                   <span className="bg-red-600 rounded-full absolute top-0 right-0 flex h-4 max-sm:h-2  max-sm:w-2  max-sm:text-[10px] text-[15px] text-white items-center justify-center w-4">
                     {basketData.length}

@@ -1,14 +1,11 @@
 import { FaRegHeart } from 'react-icons/fa'
 import { AiFillHeart } from 'react-icons/ai'
-import {  useEffect, useState } from 'react'
-import { useDispatch } from 'react-redux'
-import { AppDispatch } from '../State/store'
+import { useState } from 'react'
 const FavoriButton = () => {
   const [active,setActive] = useState<boolean>(()=>{
     const fav = localStorage.getItem('favoriButton')
     return fav? JSON.parse(fav):false
   })
-  const dispatch = useDispatch<AppDispatch>()
 
   return (
     <div>

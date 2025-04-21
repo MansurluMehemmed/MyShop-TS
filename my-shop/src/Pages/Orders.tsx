@@ -30,7 +30,7 @@ const Orders = () => {
 
               <div className="flex w-full my-[10px] ">
                 {order.product.map((product) => (
-                  <Link key={product.id} onClick={()=>{dispatch(productPageElement(product.id))}} className="w-[100px] h-[100px]" to={`/productpage/${product.id}`}>
+                  <Link key={product.id} onClick={()=>{dispatch(productPageElement(product.id))}} className="w-[100px] hover:shadow-xl h-[100px]" to={`/productpage/${product.id}`}>
                     <img className="rounded-xl" src={product.thumbnail} alt={product.title} />
                   </Link>
                 ))}

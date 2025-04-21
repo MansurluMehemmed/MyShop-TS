@@ -1,11 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import {  useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
 import { add } from "../State/FetchSlice";
-import Rating from "../layouts/Rating/Rating";
 import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import ImageSlider from "../layouts/ImageSlider";
+import { Link } from "react-scroll";
 
 const ProductsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -17,7 +17,7 @@ const ProductsPage = () => {
   }, []);
 
   return (
-    <div className="w-full flex justify-center items-center  ">
+    <div className="w-full flex justify-center items-center pb-[100px] ">
       <div className=" w-[80%]  mt-[100px] relative ">
         <button
           onClick={() => navigate(-1)}
@@ -40,11 +40,11 @@ const ProductsPage = () => {
                 </h2>
 
                 <p className="mb-5">{product.description}</p>
-                <Rating />
+                
                 <div className="flex flex-row  mb-10 gap-5">
                   <p>Total Rating: {product.rating}</p>
-                  <Link
-                    to="/reviews"
+                  <Link smooth={true}
+                    to="reviews"
                     className="flex cursor-pointer "
                     onClick={() => setRewiewDisplay(!rewiewDisplay)}
                   >
@@ -87,7 +87,7 @@ const ProductsPage = () => {
               </div>
             </div>
             <div className="flex mt-10 w-full">
-              <div id="/reviews" className={`flex flex-col w-full gap-5 `}>
+              <div id="reviews" className={`flex flex-col w-full gap-5 `}>
                 <h2 className="text-2xl">Product reviews and ratings:</h2>
                 <ul className="w-full flex flex-col p-0 m-0 shadow gap-2">
                   {product.reviews.map((review) => (

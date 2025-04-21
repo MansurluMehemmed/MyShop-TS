@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
 import { Link, useNavigate } from "react-router-dom";
-import { moreInfoOrder, productPageElement } from "../State/FetchSlice";
+import {  productPageElement } from "../State/FetchSlice";
 
 const MoreInfoOrders = () => {
   const { MoreInfoOrders } = useSelector((state: RootState) => state.fetch);

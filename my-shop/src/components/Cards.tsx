@@ -1,6 +1,6 @@
 import { useSelector, useDispatch } from "react-redux";
 import { AppDispatch, RootState } from "../State/store";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   fetchData,
 } from "../State/FetchSlice";
@@ -8,7 +8,7 @@ import CardProps from "./CardProps";
 
 const Cards = () => {
   const dispatch = useDispatch<AppDispatch>();
-  let { data,  showMore,seachQuery } =
+  let { data,  showMore } =
     useSelector((state: RootState) => state.fetch);
   
   

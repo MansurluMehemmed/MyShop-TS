@@ -1,10 +1,9 @@
 
-import { useDispatch, useSelector } from "react-redux";
-import { AppDispatch, RootState } from "../State/store";
+import {  useSelector } from "react-redux";
+import {  RootState } from "../State/store";
 import CardProps from "../components/CardProps";
 
 const FavoriProducts = () => {
-  const dispatch = useDispatch<AppDispatch>();
   const { favoriteProducts } = useSelector((state: RootState) => state.fetch);
 
   return (

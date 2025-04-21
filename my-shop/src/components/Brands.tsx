@@ -47,12 +47,12 @@ const Brands: React.FC = () => {
           ◀
         </button>
 
-        <div className="flex w-full space-x-4 ">
+        <div className="grid grid-cols-5 max-sm:grid-cols-3 sm:grid-cols-4 lg:grid-cols-5 w-full space-x-4  ">
           {currentSlides.map((brand) => (
             <div
             onClick={(e)=>handleBrands(e)}
               key={brand}
-              className="w-[25%] cursor-pointer h-24 bg-white rounded-md shadow flex items-center justify-center"
+              className="w-full cursor-pointer h-24 bg-white rounded-md shadow flex items-center justify-center"
             > {brand}
             </div>
           ))}
