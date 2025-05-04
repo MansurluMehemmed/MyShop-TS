@@ -40,11 +40,11 @@ const Brands: React.FC = () => {
             1024: { slidesPerView: 5,slidesPerGroup:5 },
           }}
           navigation
-          className="mySwiper"
+          className="mySwiper h-24 max-sm:h-[12] sm:h-[18]"
         >
           {brands.map((brand, index) => (
             <div className="flex justify-center w-[80%]">
-              <SwiperSlide key={index}>
+              <SwiperSlide key={index} className="h-24 max-sm:h-[12] sm:h-[18]">
                 <div
                   onClick={(e) => handleBrands(e)}
                   key={brand}

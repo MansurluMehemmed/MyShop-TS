@@ -57,3 +57,11 @@
 .swiper-button-prev {
   left: 0;
 }
+
+
+.swiper-slide {
+    height: 6rem !important; /* Tailwind'də h-24 = 6rem */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
