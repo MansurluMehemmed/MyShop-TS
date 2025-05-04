@@ -26,7 +26,7 @@ const Brands: React.FC = () => {
   };
   return (
     <div className="w-full flex  justify-center px-4 py-6">
-      <div className="flex h-24  max-sm:h-[12] sm:h-[18] w-[80%]">
+      <div className="flex !h-24  max-sm:h-[12] sm:h-[18] w-[80%]">
         <Swiper
           modules={[Navigation]}
           spaceBetween={10}
@@ -40,15 +40,15 @@ const Brands: React.FC = () => {
             1024: { slidesPerView: 5,slidesPerGroup:5 },
           }}
           navigation
-          className="mySwiper h-24 max-sm:h-[12] sm:h-[18]"
+          className="mySwiper !h-24 max-sm:h-[12] sm:h-[18]"
         >
           {brands.map((brand, index) => (
             <div className="flex justify-center w-[80%]">
-              <SwiperSlide key={index} className="h-24 max-sm:h-[12] sm:h-[18]">
+              <SwiperSlide key={index} className="!h-24 max-sm:h-[12] sm:h-[18]">
                 <div
                   onClick={(e) => handleBrands(e)}
                   key={brand}
-                  className="w-full max-sm:text-[11px]  sm:text-[15px] cursor-pointer h-full bg-white rounded-md shadow flex items-center justify-center"
+                  className="w-full max-sm:text-[11px]  sm:text-[15px] cursor-pointer h-24 max-sm:h-[12] sm:h-[18] bg-white rounded-md shadow flex items-center justify-center"
                   //  className="bg-white rounded-xl shadow-md h-[100px]  text-center text-lg font-semibold"
                 >
                   {brand}
