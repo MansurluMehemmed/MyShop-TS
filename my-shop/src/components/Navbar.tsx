@@ -186,20 +186,19 @@ const Navbar = () => {
             ""
           )}
         </div>
-        <Link
-          to="home"
+        <NavLink          to="/"
           className=" hover:text-gray-400 transition duration-300 ease-in-out"
           onClick={closeMenu}
         >
           Home
-        </Link>
-        <Link
-          to="shop"
+        </NavLink>
+        <NavLink
+          to="/orders"
           className="hover:text-gray-400 transition duration-300 ease-in-out "
           onClick={closeMenu}
         >
-          Shop
-        </Link>
+          Orders
+        </NavLink>
         <Link
           to="blog"
           className="hover:text-gray-400 transition duration-300 ease-in-out "

@@ -1,0 +1,59 @@
+.swiper-button-next,
+.swiper-button-prev {
+  width: 30px;
+  height: 50px;
+  background: #b8b7b7;
+  color: white;
+  border-radius: 3px;
+  font-size: 0; /* Ox işarəsinin fontunu sıfırlayırıq */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0.8;
+}
+
+/* Ox işarələrini kiçiltmək üçün scale istifadə et */
+.swiper-button-next::after,
+.swiper-button-prev::after {
+  font-size: 30px; /* Default olaraq font ölçüsünü təyin et */
+  transform: scale(0.6); /* Ox işarələrini kiçilt */
+}
+
+/* Media query: kiçik ekranlar üçün ox ölçüsünü kiçilt */
+@media (max-width: 600px) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: 15px;
+    height: 30px;
+    border-radius: 2px;
+    font-size: 10px; /* Bu font ölçüsünü dəyişmək işə yaramır */
+  }}
+  @media (min-width:600px)and ( max-width: 900px) {
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: 20px;
+      height: 35px;
+      border-radius: 2px;
+      font-size: 10px; /* Bu font ölçüsünü dəyişmək işə yaramır */
+    }
+
+  .swiper-button-next::after,
+  .swiper-button-prev::after {
+    font-size: 20px; /* kiçik ekranlarda daha kiçik ox ölçüsü */
+    transform: scale(0.5); /* kiçik ölçü */
+  }
+}
+
+/* Hover effekti */
+.swiper-button-next:hover,
+.swiper-button-prev:hover {
+  opacity: 1;
+}
+
+.swiper-button-next {
+  right: 0;
+}
+
+.swiper-button-prev {
+  left: 0;
+}

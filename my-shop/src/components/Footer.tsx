@@ -38,7 +38,7 @@ const Footer = () => {
           </section>
         </div>
         <div className="flex">
-            <p className="text-red-400 max-sm:text-[12px]">Developed by Muhammed</p>
+            <p className="text-red-400 max-sm:text-[12px]">Developed by Mansurlu</p>
         </div>
       </div>
     </div>
