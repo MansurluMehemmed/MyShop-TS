@@ -25,7 +25,7 @@ const Brands: React.FC = () => {
     navigate("/filteredProducts");
   };
   return (
-    <div className="w-full flex justify-center px-4 py-6">
+    <div className="w-full flex h-24  max-sm:h-[12] sm:h-[18] justify-center px-4 py-6">
       <div className="flex w-[80%]">
         <Swiper
           modules={[Navigation]}
@@ -48,7 +48,7 @@ const Brands: React.FC = () => {
                 <div
                   onClick={(e) => handleBrands(e)}
                   key={brand}
-                  className="w-full max-sm:text-[11px] max-sm:h-[12] sm:h-[18] sm:text-[15px] cursor-pointer h-24 bg-white rounded-md shadow flex items-center justify-center"
+                  className="w-full max-sm:text-[11px]  sm:text-[15px] cursor-pointer h-full bg-white rounded-md shadow flex items-center justify-center"
                   //  className="bg-white rounded-xl shadow-md h-[100px]  text-center text-lg font-semibold"
                 >
                   {brand}
