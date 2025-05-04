@@ -8,6 +8,7 @@ interface ImageSliderProps {
 
 const Slider: React.FC<ImageSliderProps> = ({ images, interval = 5000 }) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
+console.log('...');
 
   // Avtomatik keçid
   useEffect(() => {
