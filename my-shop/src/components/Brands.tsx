@@ -25,8 +25,8 @@ const Brands: React.FC = () => {
     navigate("/filteredProducts");
   };
   return (
-    <div className="w-full flex h-24  max-sm:h-[12] sm:h-[18] justify-center px-4 py-6">
-      <div className="flex w-[80%]">
+    <div className="w-full flex  justify-center px-4 py-6">
+      <div className="flex h-24  max-sm:h-[12] sm:h-[18] w-[80%]">
         <Swiper
           modules={[Navigation]}
           spaceBetween={10}
