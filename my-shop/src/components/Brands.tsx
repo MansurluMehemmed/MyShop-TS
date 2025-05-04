@@ -48,7 +48,7 @@ const Brands: React.FC = () => {
                 <div
                   onClick={(e) => handleBrands(e)}
                   key={brand}
-                  className="w-full max-sm:text-[11px]  sm:text-[15px] cursor-pointer h-24 max-sm:h-[12] sm:h-[18] bg-white rounded-md shadow flex items-center justify-center"
+                  className="w-full max-sm:text-[11px]  sm:text-[15px] cursor-pointer !h-full  bg-white rounded-md shadow flex items-center justify-center"
                   //  className="bg-white rounded-xl shadow-md h-[100px]  text-center text-lg font-semibold"
                 >
                   {brand}
