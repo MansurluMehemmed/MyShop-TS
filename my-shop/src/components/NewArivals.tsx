@@ -24,8 +24,8 @@ const NewArivals = () => {
    }
     
   return (
-    <div  className="flex flex-col items-center justify-center relative bg-[#F7F7F7] py-10" >
-        <h1 id='/newArrivals'  className="text-[40px] max-sm:text-[24px] font-semibold flex items-center justify-center">New Arrivals</h1>
+    <div  id='newArrivals'  className="flex flex-col items-center justify-center relative bg-[#F7F7F7] py-10" >
+        <h1   className="text-[40px] max-sm:text-[24px] font-semibold flex items-center justify-center">New Arrivals</h1>
         <div  className="flex flex-row items-center justify-center w-auto mt-10 max-sm:mt-5">
             <ul className="flex flex-row decoration-0 flex-wrap  text-2xl p-0 m-0 items-center justify-center">
             <li onClick={(e)=>handleClickCategory(e)} className={`h-[40px] min-w-[108px] max-sm:h-[25px] max-sm:min-w-[70px] max-sm:px-[15px] px-[25px ] max-sm:text-[12px] cursor-pointer ${selectedCategory==='ALL'? 'activee':''}  text-[14px]   border border-[#ebebeb] rounded-[3px] bg-white flex items-center justify-center `}>ALL</li>

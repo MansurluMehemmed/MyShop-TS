@@ -25,8 +25,10 @@ const Brands: React.FC = () => {
     navigate("/filteredProducts");
   };
   return (
-    <div className="w-full flex  justify-center px-4 py-6">
-      <div className="flex !h-24  max-sm:h-[12] sm:h-[18] w-[80%]">
+    <div className="w-full flex flex-col items-center justify-center px-4 py-6">
+      <div className="flex flex-col items-center w-[80%] gap-10">
+        <h2 className="text-2xl flex self-start font-semibold">Brands</h2>
+      <div className="flex !h-24  max-sm:h-[12] sm:h-[18] w-full">
         <Swiper
           modules={[Navigation]}
           spaceBetween={10}
@@ -57,6 +59,7 @@ const Brands: React.FC = () => {
             </div>
           ))}
         </Swiper>
+      </div>
       </div>
     </div>
   );

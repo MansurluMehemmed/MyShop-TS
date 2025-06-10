@@ -6,6 +6,7 @@ import { MessageCircle } from "lucide-react";
 import { useEffect, useState } from "react";
 import ImageSlider from "../layouts/ImageSlider";
 import { Link } from "react-scroll";
+import Rating from "../hooks/Rating";
 
 const ProductsPage = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -41,8 +42,7 @@ const ProductsPage = () => {
 
                 <p className="mb-5">{product.description}</p>
                 
-                <div className="flex flex-row  mb-10 gap-5">
-                  <p>Total Rating: {product.rating}</p>
+                <div className="flex flex-row justify-between mb-10 gap-5">
                   <Link smooth={true}
                     to="reviews"
                     className="flex cursor-pointer "
@@ -51,6 +51,7 @@ const ProductsPage = () => {
                     <MessageCircle />
                     <span>{product.reviews?.length} rewiew</span>
                   </Link>
+                  <p><Rating rating = {product.rating}/></p>
                 </div>
                 <div className="flex  flex-row mb-10  gap-5 items-center text-2xl">
                   {product.discountPercentage && (
@@ -111,7 +112,7 @@ const ProductsPage = () => {
                         </div>
                         <div className="flex justify-end w-[50%]">
                           <p className="text-[16px] max-sm:text-[12px]">
-                            Rating: {review.rating}/5
+                            <Rating rating={review.rating}/>
                           </p>
                         </div>
                       </div>
