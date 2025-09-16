@@ -191,20 +191,7 @@ export const FetchSlice = createSlice({
     setSearchQuery: (state, action) => {
       state.seachQuery = action.payload;
     },
-    filteredSearch: (state, action) => {
-      if (state.seachQuery !== "") {
-        state.filteredProduct = state.data.filter((product) =>
-          product.title.toUpperCase().includes(action.payload.toUpperCase())
-        );
-      }if(action.payload='data'){
-        state.filteredProduct = state.data
-      }
-
-      localStorage.setItem(
-        "filteredProduct",
-        JSON.stringify(state.filteredProduct)
-      );
-    },
+   
     filteredBrands: (state, action) => {
       if(state.filteredProduct.length>0||state.seachQuery!==''){
         state.filteredProduct = state.filteredProduct.filter(
@@ -223,6 +210,20 @@ export const FetchSlice = createSlice({
       );
     },
 
+     filteredSearch: (state, action) => {
+      if (state.seachQuery !== "") {
+        state.filteredProduct = state.data.filter((product) =>
+          product.title.toUpperCase().includes(action.payload.toUpperCase())
+        );
+      }if(action.payload='data'){
+        state.filteredProduct = state.data
+      }
+
+      localStorage.setItem(
+        "filteredProduct",
+        JSON.stringify(state.filteredProduct)
+      );
+    },
     
     addFavorite: (state, action) => {
       if (
